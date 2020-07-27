@@ -4,5 +4,12 @@ services:
     image:  postgres:alpine
     environment:
        POSTGRES_PASSWORD: example
-  # django:
-  #   ---
+  django:
+    image: django
+    build:
+      context: ./django
+      dockerfile: docker/Dockerfile
+    volumes:
+      - './django:/django'
+    depends_on:
+      - postgres

@@ -26,3 +26,9 @@ build:
 .ONESHELL:
 shell-django:
 	@ docker-compose exec django /bin/bash
+
+
+.PHONY: shell-postgres
+.ONESHELL:
+shell-postgres:
+	@ docker-compose exec postgres /bin/bash

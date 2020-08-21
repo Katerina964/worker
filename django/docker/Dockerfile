@@ -25,9 +25,6 @@ COPY requirements.txt requirements.txt
 # После того, как мы скопировали наши dependencies, мы их устанавливаем.
 # RUN <команда, которую мы хотим выполнить>
 RUN pip install -r requirements.txt
-# Копируем файл вхождения в контейнер. Он обьясняет нашему образу, что делать, когда
-# контейнер запускается из этого образа.
-COPY docker/entrypoint.sh docker/entrypoint.sh
 # Указываем путь к файлу вхождения.
 ENTRYPOINT ["docker/entrypoint.sh"]
 # Говорим, какого пользователя мы хотим использовать в качестве пользователя по умолчанию.

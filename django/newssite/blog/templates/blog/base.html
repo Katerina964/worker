@@ -1,0 +1,62 @@
+{% load static %}
+<html lang="en">
+      <head>
+        <meta charset="utf-8">
+
+        <meta name="viewport" content="width=device-width">
+
+        <title>Blog</title>
+
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+        <link href='//fonts.googleapis.com/css?family=Lobster&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" href="{% static 'css/blog.css' %}">
+        <!-- <link rel="stylesheet" media="screen and (max-width: 768px)" href="{% static 'css/clip1.css' %}"> -->
+
+    </head>
+    <body>
+      <div class='Site_Name'>
+        <h1>Название сайта</h1>
+      </div>
+
+
+
+      {% block content %} {% endblock %}
+      
+      {% block pagination %}
+      <div class="container-fluid">
+      <nav aria-label="...">
+          <ul class="pagination justify-content-center">
+
+             <li class="page-item">
+             {% if page_obj.has_previous %}
+             <a href="?page={{ page_obj.previous_page_number }}">назад</a>
+             {% endif %}
+             </li>
+
+              <li class="page-item">
+              {% if page_obj.number == 1 %}
+              <a  href="/all?page=1">1</a>  из {{ page_obj.paginator.num_pages }}
+
+              {% else %}
+              {{page_obj.number}} из {{ page_obj.paginator.num_pages }}
+              {% endif %}
+              </li>
+
+              <li class="page-item">
+             {% if page_obj.has_next %}
+             <a href="?page={{ page_obj.next_page_number }}">далее</a>
+             {% endif %}
+              </li>
+
+
+          </ul>
+      </nav>
+
+      {% endblock %}
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+
+    </body>
+  </html>

@@ -1,0 +1,22 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+<div class="container-fluid ">
+<div class="row">
+ {% for post in post_list %}
+
+    <div class="col-12 col-sm-4"  style="width: 400px; height: 400px;border: 1px solid green;">
+    <!-- <div class="post_list__item "> -->
+    <h2>{{ post.title }}</h2>
+    <!-- <img src="{{hairclip.img.url}}" alt="{{ hairclip.img.name }}"><button name="product" value="{{ hairclip.pk }}" -->
+                    <!-- type="submit" class="btn btn-outline-warning">купить</button></form> -->
+
+     <p>{{ post.text}}</p>
+     <div  stile="text-align: bottom"><h3>автор:{{ post.author }} </h3> <h3>{{ post.published_date }} </h3></div>
+
+
+     </div>
+
+{% endfor %}
+</div>
+</div>
+{% endblock %}

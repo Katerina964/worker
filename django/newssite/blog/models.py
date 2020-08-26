@@ -1,5 +1,6 @@
 from django.db import models
 from django.utils import timezone
+import datetime
 
 class Author(models.Model):
     name =models.CharField(max_length=50)
@@ -15,6 +16,7 @@ class Post(models.Model):
     img = models.ImageField(upload_to='hairclip', verbose_name='photo', blank=True)
     published_date = models.DateTimeField(
             default=timezone.now)
+    quantity=models.PositiveSmallIntegerField(default=1)
 
 
     def __str__(self):

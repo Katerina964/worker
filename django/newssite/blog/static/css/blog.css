@@ -1,8 +1,10 @@
 
 body {font-family: Times New Roman;}
-p { white-space: nowrap; overflow: hidden; text-overflow: ellipsis;}
+
 .detail h2{text-align: center;}
-.detail{width: 1500px }
+.detail{width:1000px; height:600px; }
 h1 {text-align: center; font-size: 500%;}
 .Site_Name{background-color: green;  height:10%; }
 h2 {text-align: center;}
+img{width: 230px; height:230px; }
+.detail_all{border: 1px solid green;}

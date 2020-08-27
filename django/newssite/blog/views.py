@@ -8,6 +8,13 @@ from django.db.models import F
 
 def homePageView(request):
     post_list = Post.objects.all().order_by("-published_date")
+
+    for post in post_list:
+        post.text = post.text[0:500] + "  . . ."
+
+        post.published_date = str(dateformat.format(post.published_date, 'Y-m-d H:i:s'))[0:10]
+        # post.pupublished_date.save()
+
     paginator = Paginator(post_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)

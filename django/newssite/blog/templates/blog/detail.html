@@ -1,12 +1,11 @@
 
 {% extends 'blog/base.html' %}
-{% block content %}
-<div class="detail" style="width: 500px">
-<h2>{{ post.title }}</h2>
-
-
- <p>{{ post.text }}</p>
- <div  stile="text-align: bottom"><h5><pre>автор:{{ post.author }}      {{ post.published_date }} </pre></h5></div>
- </div>
-{% endblock %}
 {% block pagination %} {% endblock %}
+{% block content %}
+<div class="detail_all" >
+<div class="detail" >
+<h2>{{ post.title }}</h2>
+ <p>{{ post.text }}</p></div>
+ <div  stile="align: bottom"><h5><pre>автор:{{ post.author }}            {{ post.published_date }} </pre></h5></div>
+</div>
+{% endblock %}

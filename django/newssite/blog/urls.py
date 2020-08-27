@@ -9,4 +9,8 @@ app_name = 'blog'
 urlpatterns = [
     path('',views.homePageView, name='homePageView'),
     path('blog/<int:pk>/', views.detail, name='detail'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -3,10 +3,10 @@
 {% block content %}
 <div class="detail" style="width: 500px">
 <h2>{{ post.title }}</h2>
-<!-- <img src="{{hairclip.img.url}}" alt="{{ hairclip.img.name }}"><button name="product" value="{{ hairclip.pk }}" -->
-                <!-- type="submit" class="btn btn-outline-warning">купить</button></form> -->
+
 
  <p>{{ post.text }}</p>
  <div  stile="text-align: bottom"><h5><pre>автор:{{ post.author }}      {{ post.published_date }} </pre></h5></div>
  </div>
 {% endblock %}
+{% block pagination %} {% endblock %}

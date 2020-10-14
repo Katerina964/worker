@@ -14,10 +14,44 @@
 
 
     </head>
-    <body>
-      <div class='Site_Name'>
-        <h1>Название сайта</h1>
-      </div>
+    {% block nav %}
+    <div class="site_name"
+    <div class="container-fluid p-0 "style="margin-left: 0px; margin-right: 0 px;">
+
+    <nav class="navigation navbar navbar-expand-lg navbar-light" style="background-color: green">
+    <a class="navbar-brand" href="#">Worker</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
+        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+
+    <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+      <ul class="navbar-nav">
+
+      <li class="nav-item">
+        <a class="nav-link " href="{% url 'blog:python_developer' %}">Python developer</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Java developer</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Разместить резюме</a>
+      </li>
+
+      <li class="nav-item">
+        <a class="nav-link" href="#">Разместить вакансию</a>
+
+
+
+      </ul>
+     </div>
+     </div>
+</nav>
+</div>
+     {% endblock %}
 
 
 

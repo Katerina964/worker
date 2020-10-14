@@ -9,6 +9,8 @@ app_name = 'blog'
 urlpatterns = [
     path('',views.homePageView, name='homePageView'),
     path('blog/<int:pk>/', views.detail, name='detail'),
+    path('python_developer', views.python_developer, name='python_developer'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

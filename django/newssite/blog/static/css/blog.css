@@ -6,13 +6,22 @@
              font-family: 'Lobster';
              }
 
+.navigation button { background-color: white}
+.navbar-brand{font-size: 100%;}
+.navigation .navbar-brand{
+          color: white; }
 
-body {font-family: Times New Roman;}
+.nav-link {color: black !important;}
+ a:hover{color:white!important}
+.dropdown-item:hover {color:grey!important}
+.page-item:hover {color:green!important}  #вопрос
+body {font-family: 'Lobster'}
+
 
 .detail h2{text-align: center;}
 .detail{width:1000px; height:600px; }
 h1 {text-align: center; font-size: 500%;}
 
-h2 {text-align: center;}
+h2, h4 {text-align: center;}
 img{width: 230px; height:230px; }
 .detail_all{border: 1px solid green;}

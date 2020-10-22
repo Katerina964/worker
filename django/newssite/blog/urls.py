@@ -10,7 +10,7 @@ urlpatterns = [
     path('',views.homePageView, name='homePageView'),
     path('blog/<int:pk>/', views.detail, name='detail'),
     path('python_developer', views.python_developer, name='python_developer'),
-
+    path('create_resume', views.create_resume, name='create_resume'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

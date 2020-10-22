@@ -1,0 +1,18 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+<h1> Разместить резюме</h1>
+<div class="form">
+<form action="{% url 'blog:create_resume' %}" method="POST" >
+    {% csrf_token %}
+       <table>
+          {{ form  }}
+       </table>
+       <button type="submit"
+       >подтвердить заказ</button>
+
+ </form>
+
+
+{% endblock %}

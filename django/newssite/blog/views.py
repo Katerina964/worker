@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone,dateformat
-from .models import Post
+from .models import Post, Resume
+from .forms import ResumeForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView
 from django.shortcuts import get_object_or_404, render, redirect
@@ -52,3 +53,9 @@ def python_developer(request):
     context = {'page_obj': page_obj}
 
     return render(request, 'blog/vacancies_list.html', context)
+
+
+def create_resume(request):
+    form = ResumeForm()
+    context = {'form': form}
+    return render(request, 'blog/create_resume.html', context)

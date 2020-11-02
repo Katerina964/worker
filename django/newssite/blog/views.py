@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone,dateformat
-from .models import Post, Resume
+from .models import Post, Resume, Vacancy
 from .forms import ResumeForm, VacancyForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView
@@ -82,7 +82,37 @@ def create_resume(request):
     context = {'form': form}
     return render(request, 'blog/create_resume.html', context)
 
+
 def create_vacancy(request):
     form = VacancyForm()
     context = {'form': form}
     return render(request, 'blog/create_vacancy.html', context)
+
+
+def manage_resume(request):
+    form = ResumeForm(request.POST)
+    if form.is_valid():
+        pk = form.save().id
+    resume = Resume.objects.get(pk=pk)
+    context = {'resume': resume}
+    return render(request, 'blog/resume.html', context)
+
+
+def manage_vacancy(request):
+    form = VacancyForm(request.POST)
+    if form.is_valid():
+        pk  = form.save().id
+    vacancy = Vacancy.objects.get(pk=pk)
+    context = {'vacancy': vacancy}
+    return render(request, 'blog/vacancy.html', context)
+
+
+def resume_list(request):
+    resume_list =Resume.objects.all().order_by("-published_date")
+
+    paginator = Paginator(resume_list, 6)
+    page = request.GET.get('page')
+    page_obj = paginator.get_page(page)
+    context = {'page_obj': page_obj}
+
+    return render(request, 'blog/resume_list.html', context)

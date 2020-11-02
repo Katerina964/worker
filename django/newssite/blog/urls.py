@@ -13,6 +13,9 @@ urlpatterns = [
     path('java_developer', views.java_developer, name='java_developer'),
     path('create_resume', views.create_resume, name='create_resume'),
     path('create_vacancy', views.create_vacancy, name='create_vacancy'),
+    path('manage_resume', views.manage_resume, name='manage_resume'),
+    path('manage_vacancy', views.manage_vacancy, name='manage_vacancy'),
+    path('resume_list', views.resume_list, name='resume_list'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

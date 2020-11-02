@@ -1,0 +1,38 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+<div class="container">
+<!-- <form action="{% url 'blog:manage_resume' %}" method="POST" >
+  {% csrf_token %} -->
+<div class ="form" style="margin-top: 20px; padding: 20px">
+     <h5 style="margin-bottom: 20px;"><b>{{resume.first_name}}{{resume.surname}}</b></h5>
+     <p><b>Позиция:   {{resume.position|cut:"https"}}</b></p>
+     <p>Тип работы:{{resume.type_work|cut:"https"}}</p>
+     <p>Местоположение:{{resume.town|cut:"https"}}</p>
+     <p><b>Опыт работы</b></p>
+     <pre>{{resume.experience|cut:"https"}}</pre>
+     <p><b>Навыки</b></p>
+     <pre>{{resume.skills|cut:"https"}}</pre>
+     {% if resume.achievements %}
+     <p><b>Достижения</b></p>
+     <p>{{resume.achievements|cut:"https"}}</p>
+     {% endif %}
+     <p><b>Образование</b></p>
+     <pre>{{resume.education|cut:"https"}}</pre>
+     {% if resume.addition %}
+     <p><b>Дополнительно</b></p>
+     <p>{{resume.addition|cut:"https"}}</p>
+     {% endif %}
+     <p>Телефон:{{resume.phone|phone2numeric}}</p>
+     <p>Email:{{resume.email}}</p>
+
+     </div>
+      <div class ="form"style="margin-bottom: 20px;" >
+      <button type="submit" class="btn btn-success">Редактировать</button></div>
+       <!-- </form> -->
+
+
+</div>
+{% endblock %}
+{% block pagination %} {% endblock %}

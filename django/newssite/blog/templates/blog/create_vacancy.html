@@ -3,17 +3,16 @@
 
 
 <div class="container">
-<div class ="form">
+<form action="{% url 'blog:manage_vacancy' %}" method="POST" > {% csrf_token %}
+<div class ="form"  style="margin-top: 20px;">
      <h2>Создать вакансию</h2></div>
-     <div class ="form">
-     <form action="{% url 'blog:create_resume' %}" method="POST" >
-     {% csrf_token %}
+     <div class ="form">    
        <table>
           {{ form  }}
-       </table></form></div>
-       <div class ="form" >
-       <button type="button" class="btn btn-success">Сохранить и опубликовать</button></div>
-
+       </table></div>
+       <div class ="form"style="margin-bottom: 20px;" >
+       <button type="submit" class="btn btn-success">Сохранить и опубликовать</button></div>
+       </form>
 </div>
 {% endblock %}
 {% block pagination %} {% endblock %}

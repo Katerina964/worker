@@ -16,6 +16,7 @@ urlpatterns = [
     path('manage_resume', views.manage_resume, name='manage_resume'),
     path('manage_vacancy', views.manage_vacancy, name='manage_vacancy'),
     path('resume_list', views.resume_list, name='resume_list'),
+    path('cabinet', views.cabinet, name='cabinet'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 

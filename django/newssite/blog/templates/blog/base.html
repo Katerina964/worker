@@ -22,9 +22,7 @@
 
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <ul class="navbar-nav">
-      <li class="nav-item dropdown">
 
-     </li>
       <li class="nav-item">
         <a class="nav-link " href="{% url 'blog:python_developer' %}">python</a>
       </li>
@@ -40,9 +38,12 @@
             <a class="dropdown-item" href="{% url 'blog:create_resume' %}">создать</a>
             <a class="dropdown-item" href="{% url 'blog:resume_list' %}">просмотреть все</a>
         </li>
-
       <li class="nav-item">
         <a class="nav-link" href="{% url 'blog:create_vacancy' %}">вакансии</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="{% url 'blog:cabinet' %}">кабинет</a>
+      </li>
       </ul>
       </div>
      <form class="form-inline my-2 my-lg-0">

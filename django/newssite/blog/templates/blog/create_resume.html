@@ -5,15 +5,18 @@
 <div class="container">
 <form action="{% url 'blog:manage_resume' %}" method="POST" >
   {% csrf_token %}
-<div class ="form" style="margin-top: 20px;">
+  <!-- {% if form.errors %}
+  <p>Этот имейл авторизирован с другим паролем.</p>
+  {% endif %} -->
+     <div class ="form" style="margin-top: 20px;">
      <h2>Создать резюме</h2></div>
      <div class ="form">
        <table>
           {{ form  }}
-       </table></div>
+      </table></div>
       <div class ="form"style="margin-bottom: 20px;" >
       <button type="submit" class="btn btn-success">Сохранить и опубликовать</button></div>
-       </form>
+      </form>
 
 
 </div>

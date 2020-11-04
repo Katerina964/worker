@@ -1,6 +1,7 @@
 from django.db import models
 from django.utils import timezone, dateformat
 import datetime
+from django.contrib.auth.models import User
 
 class Author(models.Model):
     name =models.CharField(max_length=50)
@@ -37,7 +38,8 @@ class Resume(models.Model):
     education = models.TextField( verbose_name='Образование')
     type_work  = models.TextField(verbose_name='Вид занятости')
     addition = models.TextField(verbose_name='Дополнительно', blank=True )
-    salary = models.CharField(max_length=20, verbose_name='Заработная плата', default="не указана")
+    salary = models.CharField(max_length=20, verbose_name='Заработная плата', blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,default="01" )
     published_date = models.DateTimeField(
             default=timezone.now, verbose_name='Дата')
 
@@ -58,7 +60,8 @@ class Vacancy(models.Model):
     responsibilities = models.TextField( verbose_name='Обязанности', blank=True )
     skills = models.CharField(max_length=500, verbose_name="Навыки")
     offer = models.TextField( verbose_name='Мы предлагаем')
-    salary = models.CharField(max_length=20, verbose_name='Заработная плата', default="не указана")
+    salary = models.CharField(max_length=20, verbose_name='Заработная плата',blank=True)
+    user = models.ForeignKey(User, on_delete=models.CASCADE, default="01")
     published_date = models.DateTimeField(
             default=timezone.now, verbose_name='Дата')
 

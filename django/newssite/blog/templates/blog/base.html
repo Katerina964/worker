@@ -46,8 +46,9 @@
       </li>
       </ul>
       </div>
-     <form class="form-inline my-2 my-lg-0">
-     <input class="form-control mr-sm-2" type="search" placeholder="email" aria-label="email">
+     <form class="form-inline my-2 my-lg-0"action="{% url 'blog:enter' %}" method="POST">{% csrf_token %}
+     <input class="form-control mr-sm-2" name="email" placeholder="email" aria-label="email">
+     <input class="form-control mr-sm-2" name="password" placeholder="password" aria-label="password">
      <button class="btn btn-outline-success my-2 my-sm-0" type="submit">log in</button>
      </form>
      </div>

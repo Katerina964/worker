@@ -17,8 +17,9 @@ urlpatterns = [
     path('manage_vacancy', views.manage_vacancy, name='manage_vacancy'),
     path('resume_list', views.resume_list, name='resume_list'),
     path('cabinet', views.cabinet, name='cabinet'),
+    path('enter', views.enter, name='enter'),
+    path('create_user', views.create_user, name='create_user'),
+    
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

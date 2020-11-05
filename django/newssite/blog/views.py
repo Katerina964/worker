@@ -25,7 +25,6 @@ def homePageView(request):
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
-
     return render(request, 'blog/post_list.html', context)
 
 
@@ -33,10 +32,9 @@ def detail(request, pk):
     post = get_object_or_404(Post, pk=pk)
     post.quantity = F('quantity') + 1
     post.save()
-
     return render(request, 'blog/detail.html', {'post': post})
 
-    #
+
 @csrf_exempt
 def python_developer(request):
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
@@ -51,7 +49,6 @@ def python_developer(request):
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
-
     return render(request, 'blog/vacancies_list.html', context)
 
 
@@ -71,7 +68,6 @@ def java_developer(request):
     context = {'page_obj': page_obj}
 
     return render(request, 'blog/vacancies_list.html', context)
-
 
 
 def create_resume(request):
@@ -102,7 +98,7 @@ def manage_resume(request):
 
 
 def manage_vacancy(request):
-    user = authenticate(username=request.POST['email'],password= request.POST['password'],)
+    user = authenticate(username=request.POST['email'],password= request.POST['password'])
     if user is None:
         user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
     request.session["user"] = user.id
@@ -134,3 +130,27 @@ def cabinet(request):
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
     return render(request, 'blog/cabinet.html', context)
+
+
+def enter(request):
+    user = authenticate(username=request.POST['email'],password=request.POST['password'])
+    print(user)
+    print(request.POST['email'])
+    print(request.POST['password'])
+    if user:
+        request.session["user"] = user.id
+        return redirect('blog:cabinet')
+    return render(request, "blog/create_user.html")
+
+
+
+def create_user(request):
+    user = authenticate(username=request.POST['email'],password=request.POST['password'])
+    print(user)
+    print(request.POST['email'])
+    print(request.POST['password'])
+    if user:
+        request.session["user"] = user.id
+        return redirect('blog:cabinet')
+    context = {"user": user}
+    return render(request, 'blog/create_user.html', context)

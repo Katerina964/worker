@@ -1,0 +1,29 @@
+{% extends 'blog/base.html' %}
+{% block content %}
+
+
+<div class="container">
+  <div class="form"style="margin-top: 40px; height: 50%" >
+  <p style="margin-bottom: 40px;margin-top: 40px">Введите email и пароль, указанные в размещенной Вами вакансии или резюме.</p>
+  <div>
+  <form class="form-inline my-2 my-lg-0" action="{% url 'blog:create_user' %}" method="POST">{% csrf_token %}
+  <input class="form-control mr-sm-2" name='email' placeholder="email" aria-label="email">
+  <input class="form-control mr-sm-2" name='password' placeholder="password" aria-label="password">
+  <button class="btn btn-outline-success my-2 my-sm-0" type="submit">log in</button>
+  </form>
+
+  {% if user == None %}
+  <div class="alert alert-success " role="alert">
+  Email или пароль указаны не верно
+  <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    <span aria-hidden="true">&times;</span>
+  </button>
+  </div>
+  {% endif %}
+  </div>
+  <p style="margin-bottom: 20px;margin-top:200px">Забыли пароль? Нажмите "Восстановить"  и он будет отправлен Вам на почту.</p>
+  <button type="submit" class="btn btn-outline-success">Восстановить</button>
+  </div>
+</div>
+{% endblock %}
+{% block pagination %} {% endblock %}

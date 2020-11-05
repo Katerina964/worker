@@ -15,9 +15,10 @@
 .nav-link {color: black !important;}
  a:hover{color:white!important}
 .dropdown-item:hover {color:grey!important}
-/* .page-item:hover {color:green!important}  #вопрос */
-/* body {font-family: 'Lobster'!important} */
 
+.page-item {padding: 10px;
+            border: 2px dotted green; margin-top: 5px;}
+.page-item a {color:green}
 
 .detail h2{text-align: center;}
 .detail{width:1000px; height:600px; }
@@ -26,8 +27,7 @@ h2, h4, h5 {text-align: center;}
 img{width: 230px; height:230px; }
 .detail_all{border: 1px solid green;}
 
-.form {border: 3px double green;border-radius: 8px; width: 80%;  font-family: 'Lobster'; color:#535956; }
+.form {border: 3px double green;border-radius: 8px; width: 80%;  font-family: 'Lobster'; color:#535956; margin-bottom: 20px; }
 .form table {color:#535956; text-align: center;}
 .form button  {margin-left: auto; margin-right: auto; }
 pre, p{font-family: 'Lobster'}
- 

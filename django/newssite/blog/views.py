@@ -134,23 +134,44 @@ def cabinet(request):
 
 def enter(request):
     user = authenticate(username=request.POST['email'],password=request.POST['password'])
-    print(user)
-    print(request.POST['email'])
-    print(request.POST['password'])
     if user:
         request.session["user"] = user.id
         return redirect('blog:cabinet')
     return render(request, "blog/create_user.html")
 
 
-
 def create_user(request):
     user = authenticate(username=request.POST['email'],password=request.POST['password'])
-    print(user)
-    print(request.POST['email'])
-    print(request.POST['password'])
     if user:
         request.session["user"] = user.id
         return redirect('blog:cabinet')
     context = {"user": user}
     return render(request, 'blog/create_user.html', context)
+
+
+def change_resume(request, pk):
+    resume = get_object_or_404(Resume,pk=pk)
+    if request.method == "POST":
+        form = ResumeForm(request.POST, instance=resume)
+        form.save()
+        resume.published_date = timezone.now()
+        resume.save()
+        context = {'resume': resume }
+        return render(request, 'blog/resume.html', context)
+    else:
+        form = ResumeForm(instance=resume)
+        context = {"form":form}
+    return render(request, 'blog/change_resume.html', context)
+
+
+def update(request, pk):
+    resume = get_object_or_404(Resume,pk=pk)
+    resume.published_date = timezone.now()
+    resume.save()
+    return redirect('blog:cabinet')
+
+
+def resume_detail(request, pk):
+    resume = Resume.objects.get(pk=pk)
+    context = {'resume': resume}
+    return render(request, 'blog/resume.html', context)

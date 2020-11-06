@@ -5,10 +5,10 @@
 
       <div class="form" style="height:220px">
       <h4 style="margin-bottom:3%; margin-top: 2%;">{{ each.first_name }}{{ each.surname }}</h4>
-      <p><b>Позиция:   {{each.position|cut:"https"}}</b></p>
-      <p style="margin-bottom:3%">{{ each.published_date|date:"d m Y"   }}</p>
-      <button type="submit" class="btn btn-outline-success">Редактировать</button>
-      <button type="submit" class="btn btn-outline-success">Обновить</button>
+      <a href="{% url 'blog:resume_detail' each.id %}"> Позиция:   {{each.position|cut:"https"}}</a>
+      <p style="margin-bottom:3%; margin-top: 2%;">{{ each.published_date|date:"d m Y"   }}</p>
+      <a href="{% url 'blog:change_resume' each.id %}" class="btn btn-outline-success">Редактировать</a>
+      <a href="{% url 'blog:update' each.id %}" class="btn btn-outline-success">Обновить дату</a>
       </div>
  {% endfor %}
 

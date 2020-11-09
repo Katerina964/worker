@@ -11,6 +11,7 @@ from django.db.models import F
 import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
+from django.views.decorators.cache import cache_page
 
 
 def homePageView(request):
@@ -36,15 +37,20 @@ def detail(request, pk):
 
 
 @csrf_exempt
+@cache_page(60 * 1440)
 def python_developer(request):
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-    data = {"keywords": "python developer",
-		"page": "1"}
-    vacancies = requests.post(url, json=data)
-    vacancies_list = vacancies.json()
-    # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
-    #      vacancies_list = json.load(f)
-    vacancies_list = vacancies_list["jobs"]
+
+    for page in range(1, 6):
+        data = {"keywords": "python developer",
+		"page":str(page)}
+        payload = requests.post(url, json=data)
+        vacancies = payload.json()["jobs"]
+        if page == 1:
+            vacancies_list = vacancies
+        vacancies_list += vacancies
+        # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
+        #      vacancies_list = json.load(f)
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -53,15 +59,18 @@ def python_developer(request):
 
 
 @csrf_exempt
+@cache_page(60 * 1440)
 def java_developer(request):
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-    data = {
-		"keywords": "java developer",
-		"page": "1"}
-    vacancies = requests.post(url, json=data)
-    print(vacancies)
-    vacancies_list = vacancies.json()
-    vacancies_list = vacancies_list["jobs"]
+    for page in range(1, 6):
+        data = {
+	    "keywords": "java developer",
+	    "page": str(page)}
+        payload = requests.post(url, json=data)
+        vacancies = payload.json()["jobs"]
+        if page == 1:
+            vacancies_list = vacancies
+        vacancies_list += vacancies
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -125,10 +134,14 @@ def cabinet(request):
     user_id= request.session.get("user", "red")
     if user_id != 'red':
         cabinet_list = Resume.objects.filter(user=user_id)
+    else:
+        return render(request, "blog/create_user.html")
+
     paginator = Paginator(cabinet_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
+
     return render(request, 'blog/cabinet.html', context)
 
 
@@ -174,4 +187,4 @@ def update(request, pk):
 def resume_detail(request, pk):
     resume = Resume.objects.get(pk=pk)
     context = {'resume': resume}
-    return render(request, 'blog/resume.html', context)
+    return render(request, 'blog/resume_list.html', context)

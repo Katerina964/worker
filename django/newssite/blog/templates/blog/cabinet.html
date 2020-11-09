@@ -3,7 +3,7 @@
 <div class="container">
  {% for each in page_obj %}
 
-      <div class="form" style="height:220px">
+      <div class="form" style="height:220px; margin-top: 2%">
       <h4 style="margin-bottom:3%; margin-top: 2%;">{{ each.first_name }}{{ each.surname }}</h4>
       <a href="{% url 'blog:resume_detail' each.id %}"> Позиция:   {{each.position|cut:"https"}}</a>
       <p style="margin-bottom:3%; margin-top: 2%;">{{ each.published_date|date:"d m Y"   }}</p>

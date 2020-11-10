@@ -12,6 +12,7 @@ import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.views.decorators.cache import cache_page
+from itertools import chain
 
 
 def homePageView(request):
@@ -94,7 +95,10 @@ def create_vacancy(request):
 def manage_resume(request):
     user = authenticate(username=request.POST['email'],password= request.POST['password'],)
     if user is None:
-        user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
+        try:
+            user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
+        except:
+            return render(request, 'blog/create_user.html')
     request.session["user"] = user.id
     form = ResumeForm(request.POST)
     if form.is_valid():
@@ -109,14 +113,17 @@ def manage_resume(request):
 def manage_vacancy(request):
     user = authenticate(username=request.POST['email'],password= request.POST['password'])
     if user is None:
-        user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
+        try:
+            user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
+        except:
+            return render(request, 'blog/create_user.html')
     request.session["user"] = user.id
     form = VacancyForm(request.POST)
     if form.is_valid():
         pk  = form.save().id
     vacancy = Vacancy.objects.get(pk=pk)
     vacancy.user = user
-    vacansy.save()
+    vacancy.save()
     context = {'vacancy': vacancy}
     return render(request, 'blog/vacancy.html', context)
 
@@ -133,15 +140,16 @@ def resume_list(request):
 def cabinet(request):
     user_id= request.session.get("user", "red")
     if user_id != 'red':
-        cabinet_list = Resume.objects.filter(user=user_id)
+        resumes = Resume.objects.filter(user=user_id)
+        vacancies = Vacancy.objects.filter(user=user_id)
+        cabinet_list = list(chain(resumes, vacancies))
     else:
         return render(request, "blog/create_user.html")
 
-    paginator = Paginator(cabinet_list, 6)
+    paginator = Paginator(cabinet_list, 3)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
-
     return render(request, 'blog/cabinet.html', context)
 
 
@@ -172,19 +180,45 @@ def change_resume(request, pk):
         context = {'resume': resume }
         return render(request, 'blog/resume.html', context)
     else:
-        form = ResumeForm(instance=resume)
+        form_resume = ResumeForm(instance=resume)
+        context = {"form_resume":form_resume}
+    return render(request, 'blog/change_resume_vacancy.html', context)
+
+def change_vacancy(request, pk):
+    vacancy = get_object_or_404(Vacancy, pk=pk)
+    if request.method == "POST":
+        form = VacancyForm(request.POST, instance=vacancy)
+        form.save()
+        vacancy.published_date = timezone.now()
+        vacancy.save()
+        context = {'vacancy': vacancy}
+        return render(request, 'blog/resume.html', context)
+    else:
+        form = VacancyForm(instance=vacancy)
         context = {"form":form}
-    return render(request, 'blog/change_resume.html', context)
+    return render(request, 'blog/change_resume_vacancy.html', context)
 
 
-def update(request, pk):
+def update_resume(request, pk):
     resume = get_object_or_404(Resume,pk=pk)
     resume.published_date = timezone.now()
     resume.save()
     return redirect('blog:cabinet')
 
 
+def update_vacancy(request, pk):
+    vacancy = get_object_or_404(Vacancy,pk=pk)
+    vacancy.published_date = timezone.now()
+    vacancy.save()
+    return redirect('blog:cabinet')
+
+
 def resume_detail(request, pk):
     resume = Resume.objects.get(pk=pk)
     context = {'resume': resume}
-    return render(request, 'blog/resume_list.html', context)
+    return render(request, 'blog/resume.html', context)
+
+def vacancy_detail(request, pk):
+    vacancy= Vacancy.objects.get(pk=pk)
+    context = {'vacancy': vacancy}
+    return render(request, 'blog/vacancy.html', context)

@@ -1,16 +1,22 @@
-{% extends 'blog/base.html' %}
+ {% extends 'blog/base.html' %}
 {% block content %}
 <div class="container">
  {% for each in page_obj %}
-
       <div class="form" style="height:220px; margin-top: 2%">
-      <h4 style="margin-bottom:3%; margin-top: 2%;">{{ each.first_name }}{{ each.surname }}</h4>
+      {% if  each.first_name  %}
+      <h4 style="margin-bottom:3%; margin-top: 2%;">Резюме {{ each.first_name }}{{ each.surname }}</h4>
       <a href="{% url 'blog:resume_detail' each.id %}"> Позиция:   {{each.position|cut:"https"}}</a>
       <p style="margin-bottom:3%; margin-top: 2%;">{{ each.published_date|date:"d m Y"   }}</p>
-      <a href="{% url 'blog:change_resume' each.id %}" class="btn btn-outline-success">Редактировать</a>
-      <a href="{% url 'blog:update' each.id %}" class="btn btn-outline-success">Обновить дату</a>
+      <a href="{% url 'blog:change_resume' each.id %}"class="btn btn-outline-success">Редактировать</a>
+      <a href="{% url 'blog:update_resume' each.id %}" class="btn btn-outline-success">Обновить дату</a>
+      {% else  %}
+      <h4 style="margin-bottom:3%; margin-top: 2%;">Вакансия {{ each.company }}</h4>
+      <a href="{% url 'blog:vacancy_detail' each.id %}"> Позиция:   {{each.position|cut:"https"}}</a>
+      <p style="margin-bottom:3%; margin-top: 2%;">{{ each.published_date|date:"d m Y"   }}</p>
+      <a href="{% url 'blog:change_vacancy' each.id %}"class="btn btn-outline-success">Редактировать</a>
+      <a href="{% url 'blog:update_vacancy' each.id %}" class="btn btn-outline-success">Обновить дату</a>
+       {% endif  %}
       </div>
  {% endfor %}
-
 </div>
 {% endblock %}

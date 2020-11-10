@@ -17,7 +17,7 @@
 .dropdown-menu a:hover {color:grey!important}
 
 .page-item {padding: 10px;
-            border: 2px dotted green; margin-top: 5px;}
+            border: 2px dotted green}
 .page-item a {color:green}
 
 .detail h2{text-align: center;}

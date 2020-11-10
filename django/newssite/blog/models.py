@@ -44,7 +44,7 @@ class Resume(models.Model):
             default=timezone.now, verbose_name='Дата')
 
     def __str__(self):
-        return self.first_name + " " + self.surname
+        return self.first_name + " " + self.surname+ " " + str(self.pk)
 
 
 class Vacancy(models.Model):

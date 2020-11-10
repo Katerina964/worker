@@ -20,9 +20,11 @@ urlpatterns = [
     path('enter', views.enter, name='enter'),
     path('create_user', views.create_user, name='create_user'),
     path('update_resume/<int:pk>/', views.change_resume, name='change_resume'),
-    path('update/<int:pk>/', views.update, name='update'),
+    path('update_vacancy/<int:pk>/', views.change_vacancy, name='change_vacancy'),
+    path('resume_update/<int:pk>', views.update_resume, name='update_resume'),
+    path('vacancy_update/<int:pk>', views.update_vacancy, name='update_vacancy'),
     path('resume/<int:pk>/', views.resume_detail, name='resume_detail'),
-
+    path('vacancy/<int:pk>/', views.vacancy_detail, name='vacancy_detail'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

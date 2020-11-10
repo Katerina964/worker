@@ -3,8 +3,6 @@
 
 
 <div class="container">
-<!-- <form action="{% url 'blog:manage_resume' %}" method="POST" >
-  {% csrf_token %} -->
 <div class ="form" style="margin-top: 20px;padding: 20px">
      <h5 style="margin-bottom: 20px;">{{vacancy.position|cut:"https"}}</h5>
      <p>Компания:{{vacancy.company}}</p>
@@ -25,10 +23,7 @@
 
      </div>
       <div class ="form"style="margin-bottom: 20px;" >
-      <button type="submit" class="btn btn-success">Редактировать</button></div>
-       <!-- </form> -->
-
-
+      <a href="{% url 'blog:change_vacancy' vacancy.id %}" class="btn btn-outline-success" style="margin-bottom:0">Редактировать</a></div>
 </div>
 {% endblock %}
 {% block pagination %} {% endblock %}

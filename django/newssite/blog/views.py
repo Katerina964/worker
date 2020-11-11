@@ -40,8 +40,12 @@ def detail(request, pk):
 @csrf_exempt
 @cache_page(60 * 1440)
 def python_developer(request):
-    url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
+    # date = datetime.date()
+    # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
+    #      vacancies_list = json.load(f)
 
+    worker_list = Vacancy.objects.filter(position__icontains="python")
+    url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
     for page in range(1, 6):
         data = {"keywords": "python developer",
 		"page":str(page)}
@@ -50,8 +54,7 @@ def python_developer(request):
         if page == 1:
             vacancies_list = vacancies
         vacancies_list += vacancies
-        # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
-        #      vacancies_list = json.load(f)
+    vacancies_list = list(chain(worker_list, vacancies_list))
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -62,6 +65,7 @@ def python_developer(request):
 @csrf_exempt
 @cache_page(60 * 1440)
 def java_developer(request):
+    worker_list = Vacancy.objects.filter(position__icontains="java")
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
     for page in range(1, 6):
         data = {
@@ -72,11 +76,11 @@ def java_developer(request):
         if page == 1:
             vacancies_list = vacancies
         vacancies_list += vacancies
+    vacancies_list = list(chain(worker_list, vacancies_list))
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
     context = {'page_obj': page_obj}
-
     return render(request, 'blog/vacancies_list.html', context)
 
 
@@ -192,7 +196,7 @@ def change_vacancy(request, pk):
         vacancy.published_date = timezone.now()
         vacancy.save()
         context = {'vacancy': vacancy}
-        return render(request, 'blog/resume.html', context)
+        return render(request, 'blog/vacancy.html', context)
     else:
         form = VacancyForm(instance=vacancy)
         context = {"form":form}

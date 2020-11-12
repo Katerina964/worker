@@ -1,5 +1,6 @@
 from django.shortcuts import render
-from django.utils import timezone,dateformat
+from django.utils import timezone
+from datetime import datetime, date
 from .models import Post, Resume, Vacancy
 from .forms import ResumeForm, VacancyForm
 from django.core.paginator import Paginator
@@ -16,25 +17,7 @@ from itertools import chain
 
 
 def homePageView(request):
-    post_list = Post.objects.all().order_by("-published_date")
-
-    for post in post_list:
-        post.text = post.text[0:500] + "  . . ."
-
-        post.published_date = str(dateformat.format(post.published_date, 'Y-m-d H:i:s'))[0:10]
-
-    paginator = Paginator(post_list, 6)
-    page = request.GET.get('page')
-    page_obj = paginator.get_page(page)
-    context = {'page_obj': page_obj}
-    return render(request, 'blog/post_list.html', context)
-
-
-def detail(request, pk):
-    post = get_object_or_404(Post, pk=pk)
-    post.quantity = F('quantity') + 1
-    post.save()
-    return render(request, 'blog/detail.html', {'post': post})
+    return render(request, 'blog/worker.html', )
 
 
 @csrf_exempt
@@ -43,7 +26,10 @@ def python_developer(request):
     # date = datetime.date()
     # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
     #      vacancies_list = json.load(f)
-
+    if datetime.today().day == 1:
+        month = datetime.today().month - 2
+        vacancy = Vacancy.objects.filter(published_date__day__lt=month)
+        vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains="python")
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
     for page in range(1, 6):
@@ -63,8 +49,12 @@ def python_developer(request):
 
 
 @csrf_exempt
-@cache_page(60 * 1440)
+# @cache_page(60 * 1440)
 def java_developer(request):
+    if datetime.today().day == 1:
+        month = datetime.today().month - 2
+        vacancy = Vacancy.objects.filter(published_date__day__lt=month)
+        vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains="java")
     url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
     for page in range(1, 6):
@@ -134,6 +124,12 @@ def manage_vacancy(request):
 
 def resume_list(request):
     resume_list =Resume.objects.all().order_by("-published_date")
+    if datetime.today().day == 1:
+        month = datetime.today().month - 2
+        print(month)
+        resumes = Resume.objects.filter(published_date__day__lt=month)
+        resumes.delete()
+        print(resumes)
     paginator = Paginator(resume_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -144,8 +140,8 @@ def resume_list(request):
 def cabinet(request):
     user_id= request.session.get("user", "red")
     if user_id != 'red':
-        resumes = Resume.objects.filter(user=user_id)
-        vacancies = Vacancy.objects.filter(user=user_id)
+        resumes = Resume.objects.filter(user=user_id).order_by("-published_date")
+        vacancies = Vacancy.objects.filter(user=user_id).order_by("-published_date")
         cabinet_list = list(chain(resumes, vacancies))
     else:
         return render(request, "blog/create_user.html")
@@ -175,6 +171,7 @@ def create_user(request):
 
 
 def change_resume(request, pk):
+
     resume = get_object_or_404(Resume,pk=pk)
     if request.method == "POST":
         form = ResumeForm(request.POST, instance=resume)
@@ -204,6 +201,7 @@ def change_vacancy(request, pk):
 
 
 def update_resume(request, pk):
+    print(pk)
     resume = get_object_or_404(Resume,pk=pk)
     resume.published_date = timezone.now()
     resume.save()
@@ -221,6 +219,7 @@ def resume_detail(request, pk):
     resume = Resume.objects.get(pk=pk)
     context = {'resume': resume}
     return render(request, 'blog/resume.html', context)
+
 
 def vacancy_detail(request, pk):
     vacancy= Vacancy.objects.get(pk=pk)

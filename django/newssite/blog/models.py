@@ -58,7 +58,7 @@ class Vacancy(models.Model):
     password = models.CharField(max_length=20, verbose_name='Пароль',)
     description = models.TextField( verbose_name='Описание вакансии')
     responsibilities = models.TextField( verbose_name='Обязанности', blank=True )
-    skills = models.CharField(max_length=500, verbose_name="Навыки")
+    skills = models.TextField(verbose_name="Навыки")
     offer = models.TextField( verbose_name='Мы предлагаем')
     salary = models.CharField(max_length=20, verbose_name='Заработная плата',blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, default="01")

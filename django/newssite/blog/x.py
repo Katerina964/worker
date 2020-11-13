@@ -11,21 +11,4 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-
-
-class Author(models.Model):
-    name =models.CharField(max_length=50)
-    surname = models.CharField(max_length=50)
-
-
-
-
-
-
-      <!-- {% for key, value in each.items %} -->
-
-     <!-- <p>{{ each.snippet|striptags|cut:"&nbsp;..."|truncatechars:272  }}</p>
-     Заработная плата: {{ each.salary|default:":не указана" }}
-     <pre>Компания: {{ each.company }}         Дата обновления: {{ each.updated|slice:":10" }}</pre> -->
-
-<!-- {% endfor %} -->
+# @cache_page(60 * 1440)

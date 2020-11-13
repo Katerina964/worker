@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.utils import timezone
-from datetime import datetime, date
+from datetime import datetime,timedelta
 from .models import Post, Resume, Vacancy
 from .forms import ResumeForm, VacancyForm
 from django.core.paginator import Paginator
@@ -14,6 +14,8 @@ from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
 from django.views.decorators.cache import cache_page
 from itertools import chain
+import os, time
+from os import path
 
 
 def homePageView(request):
@@ -21,26 +23,30 @@ def homePageView(request):
 
 
 @csrf_exempt
-@cache_page(60 * 1440)
 def python_developer(request):
-    # date = datetime.date()
-    # with open('/django/newssite/blog/json/python.json', 'rt') as f:s
-    #      vacancies_list = json.load(f)
     if datetime.today().day == 1:
         month = datetime.today().month - 2
         vacancy = Vacancy.objects.filter(published_date__day__lt=month)
         vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains="python")
-    url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-    for page in range(1, 6):
-        data = {"keywords": "python developer",
-		"page":str(page)}
-        payload = requests.post(url, json=data)
-        vacancies = payload.json()["jobs"]
-        if page == 1:
-            vacancies_list = vacancies
-        vacancies_list += vacancies
-    vacancies_list = list(chain(worker_list, vacancies_list))
+    file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/json/cache_python.txt'))
+    delta_time = (datetime.now() - file_date).days
+    if delta_time > 0:
+        url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
+        for page in range(1, 6):
+            data = {
+    	    "keywords": "python developer",
+    	    "page": str(page)}
+            payload = requests.post(url, json=data)
+            vacancies = payload.json()["jobs"]
+            if page == 1:
+                vacancies_list = vacancies
+            vacancies_list += vacancies
+        with open('/django/newssite/blog/json/cache_python.txt', 'w') as f:
+              f.write(json.dumps(vacancies_list))
+    with open('/django/newssite/blog/json/cache_python.txt', 'r') as f:
+         vacancies_lists = json.load(f)
+    vacancies_list = list(chain(worker_list, vacancies_lists))
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -49,24 +55,29 @@ def python_developer(request):
 
 
 @csrf_exempt
-# @cache_page(60 * 1440)
 def java_developer(request):
     if datetime.today().day == 1:
         month = datetime.today().month - 2
         vacancy = Vacancy.objects.filter(published_date__day__lt=month)
         vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains="java")
-    url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-    for page in range(1, 6):
-        data = {
-	    "keywords": "java developer",
-	    "page": str(page)}
-        payload = requests.post(url, json=data)
-        vacancies = payload.json()["jobs"]
-        if page == 1:
-            vacancies_list = vacancies
-        vacancies_list += vacancies
-    vacancies_list = list(chain(worker_list, vacancies_list))
+    file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/json/cache_java.txt'))
+    delta_time = (datetime.now() - file_date).days
+    if delta_time > 0:
+        url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
+        for page in range(1, 6):
+            data = {"keywords": "java developer",
+    	           "page": str(page)}
+            payload = requests.post(url, json=data)
+            vacancies = payload.json()["jobs"]
+            if page == 1:
+                vacancies_list = vacancies
+            vacancies_list += vacancies
+        with open('/django/newssite/blog/json/cache_java.txt', 'w') as f:
+              f.write(json.dumps(vacancies_list))
+    with open('/django/newssite/blog/json/cache_java.txt', 'r') as f:
+         vacancies_lists = json.load(f)
+    vacancies_list = list(chain(worker_list, vacancies_lists))
     paginator = Paginator(vacancies_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -123,13 +134,13 @@ def manage_vacancy(request):
 
 
 def resume_list(request):
-    resume_list =Resume.objects.all().order_by("-published_date")
     if datetime.today().day == 1:
         month = datetime.today().month - 2
-        print(month)
         resumes = Resume.objects.filter(published_date__day__lt=month)
         resumes.delete()
-        print(resumes)
+    resume_list =Resume.objects.all().order_by("-published_date")
+
+
     paginator = Paginator(resume_list, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -145,7 +156,6 @@ def cabinet(request):
         cabinet_list = list(chain(resumes, vacancies))
     else:
         return render(request, "blog/create_user.html")
-
     paginator = Paginator(cabinet_list, 3)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
@@ -171,7 +181,6 @@ def create_user(request):
 
 
 def change_resume(request, pk):
-
     resume = get_object_or_404(Resume,pk=pk)
     if request.method == "POST":
         form = ResumeForm(request.POST, instance=resume)
@@ -201,7 +210,6 @@ def change_vacancy(request, pk):
 
 
 def update_resume(request, pk):
-    print(pk)
     resume = get_object_or_404(Resume,pk=pk)
     resume.published_date = timezone.now()
     resume.save()

@@ -5,19 +5,19 @@
 <div class="container">
 <div class ="form" style="margin-top: 20px;padding: 20px">
      <h5 style="margin-bottom: 20px;">{{vacancy.position|cut:"https"}}</h5>
-     <p>Компания:{{vacancy.company}}</p>
-     <p>Тип работы:{{vacancy.type_work|cut:"https"}}</p>
-     <p>Местоположение:{{vacancy.town|cut:"https"}}</p>
+     <p>Компания: {{vacancy.company}}</p>
+     <p>Тип работы: {{vacancy.type_work|cut:"https"}}</p>
+     <p>Местоположение: {{vacancy.town|cut:"https"}}</p>
      <p><b>Описание вакансии </b></p>
-     <p>{{vacancy.description|cut:"https"}}</p>
+     <p> {{vacancy.description|cut:"https"}}</p>
      {% if  vacancy.responsibilities %}
      <p><b>Обязанности</b></p>
-     <pre>{{vacancy.responsibilities|cut:"https"}}</pre>
+     <p> {{vacancy.responsibilities|cut:"https"}}</p>
      {% endif %}
      <p><b>Навыки</b></p>
-     <pre>{{vacancy.skills|cut:"https"}}</pre>
+     <p> {{vacancy.skills|cut:"https"}}</p>
      <p><b>Мы предлагаем</b></p>
-     <pre>{{vacancy.offer|cut:"https"}}</pre>
+     <p> {{vacancy.offer|cut:"https"}}</p>
      <p>Телефон: {{vacancy.phone|phone2numeric}}</p>
      <p>Email: {{vacancy.email}}</p>
 

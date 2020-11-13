@@ -4,23 +4,24 @@
 
 <div class="container">
 <div class ="form" style="margin-top: 20px; padding: 20px">
-     <h5 style="margin-bottom: 20px;"><b>{{resume.first_name}}{{resume.surname}}</b></h5>
+     <h5><b>Резюме</b></h5>
+     <h5 style="margin-bottom: 20px;margin-top: 0"><b>{{resume.first_name}}{{resume.surname}}</b></h5>
      <p><b>Позиция:   {{resume.position|cut:"https"}}</b></p>
-     <p>Тип работы:{{resume.type_work|cut:"https"}}</p>
-     <p>Местоположение:{{resume.town|cut:"https"}}</p>
+     <p>Тип работы: {{resume.type_work|cut:"https"}}</p>
+     <p>Местоположение: {{resume.town|cut:"https"}}</p>
      <p><b>Опыт работы</b></p>
-     <pre>{{resume.experience|cut:"https"}}</pre>
+     <p> {{resume.experience|cut:"https"}}</p>
      <p><b>Навыки</b></p>
-     <pre>{{resume.skills|cut:"https"}}</pre>
+     <p> {{resume.skills|cut:"https"}}</p>
      {% if resume.achievements %}
      <p><b>Достижения</b></p>
-     <p>{{resume.achievements|cut:"https"}}</p>
+     <p> {{resume.achievements|cut:"https"}}</p>
      {% endif %}
      <p><b>Образование</b></p>
-     <pre>{{resume.education|cut:"https"}}</pre>
+     <p>{{resume.education|cut:"https"}}</p>
      {% if resume.addition %}
      <p><b>Дополнительно</b></p>
-     <p>{{resume.addition|cut:"https"}}</p>
+     <p> {{resume.addition|cut:"https"}}</p>
      {% endif %}
      <p>Телефон:{{resume.phone|phone2numeric}}</p>
      <p>Email:{{resume.email}}</p>

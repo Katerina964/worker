@@ -24,6 +24,9 @@ urlpatterns = [
     path('vacancy_update/<int:pk>', views.update_vacancy, name='update_vacancy'),
     path('resume/<int:pk>/', views.resume_detail, name='resume_detail'),
     path('vacancy/<int:pk>/', views.vacancy_detail, name='vacancy_detail'),
+    path('delete_vacancy/<int:pk>/', views.delete_vacancy, name='delete_vacancy'),
+    path('delete_resume/<int:pk>/', views.delete_resume, name='delete_resume'),
+
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

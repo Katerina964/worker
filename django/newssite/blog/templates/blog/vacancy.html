@@ -1,29 +1,28 @@
 {% extends 'blog/base.html' %}
 {% block content %}
-
-
 <div class="container">
 <div class ="form" style="margin-top: 20px;padding: 20px">
-     <h5 style="margin-bottom: 20px;">{{vacancy.position|cut:"https"}}</h5>
-     <p>Компания: {{vacancy.company}}</p>
-     <p>Тип работы: {{vacancy.type_work|cut:"https"}}</p>
-     <p>Местоположение: {{vacancy.town|cut:"https"}}</p>
+     <h5 >{{vacancy.position|cut:"https"}}</h5>
+      {% if owner == "YES"  %}
+      <div class="button">
+      <a href="{% url 'blog:change_vacancy' vacancy.id %}" style="margin-bottom: 2%" class="btn btn-outline-success">редактировать</a>
+      <a href="{% url 'blog:cabinet' %}" style="margin-bottom: 2%" class="btn btn-outline-success">сохранить</a></div>
+      {% endif %}
+     <pre style="margin-bottom: 0;">Компания: {{vacancy.company}}</pre>
+     <pre style="margin-bottom: 0;">Тип работы: {{vacancy.type_work|cut:"https"}}</pre>
+     <pre>Местоположение: {{vacancy.town|cut:"https"}}</pre>
      <p><b>Описание вакансии </b></p>
-     <p> {{vacancy.description|cut:"https"}}</p>
+     <pre> {{vacancy.description|cut:"https"}}</pre>
      {% if  vacancy.responsibilities %}
      <p><b>Обязанности</b></p>
-     <p> {{vacancy.responsibilities|cut:"https"}}</p>
+     <pre> {{vacancy.responsibilities|cut:"https"}}</pre>
      {% endif %}
      <p><b>Навыки</b></p>
-     <p> {{vacancy.skills|cut:"https"}}</p>
+     <pre> {{vacancy.skills|cut:"https"}}</pre>
      <p><b>Мы предлагаем</b></p>
-     <p> {{vacancy.offer|cut:"https"}}</p>
-     <p>Телефон: {{vacancy.phone|phone2numeric}}</p>
-     <p>Email: {{vacancy.email}}</p>
-
-     <!-- </div>
-      <div class ="form"style="margin-bottom: 20px;" >
-      <a href="{% url 'blog:change_vacancy' vacancy.id %}" class="btn btn-outline-success" style="margin-bottom:0">Редактировать</a></div> -->
+     <pre> {{vacancy.offer|cut:"https"}}</pre>
+     <pre style="margin-bottom: 0">Телефон: {{vacancy.phone|phone2numeric}}</pre>
+     <pre>Email: {{vacancy.email}}</pre>
 </div>
 {% endblock %}
 {% block pagination %} {% endblock %}

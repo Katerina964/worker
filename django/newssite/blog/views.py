@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.utils import timezone
 from datetime import datetime,timedelta
-from .models import Post, Resume, Vacancy
+from .models import Resume, Vacancy
 from .forms import ResumeForm, VacancyForm
 from django.core.paginator import Paginator
 from django.views.generic import ListView
@@ -30,6 +30,7 @@ def get_vacancies(request, keywords, position, cache_filename):
     worker_list = Vacancy.objects.filter(position__icontains=position)
     file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/json/cache_python.txt'))
     delta_time = (datetime.now() - file_date).days
+    print(delta_time,file_date)
     if delta_time > 0:
         url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
         for page in range(1, 6):
@@ -86,10 +87,11 @@ def manage_questionnaire(request, class_form, type, key, template):
     form = class_form(request.POST)
     if form.is_valid():
         pk  = form.save().id
+        owner = "YES"
     questionnaire = type.objects.get(pk=pk)
     questionnaire.user = user
     questionnaire.save()
-    context = {key: questionnaire}
+    context = {key: questionnaire, 'owner':owner }
     return render(request, template, context)
 
 
@@ -153,7 +155,8 @@ def change_resume(request, pk):
         form.save()
         resume.published_date = timezone.now()
         resume.save()
-        context = {'resume': resume }
+        owner = "YES"
+        context = {'resume': resume, 'owner':owner }
         return render(request, 'blog/resume.html', context)
     else:
         form_resume = ResumeForm(instance=resume)
@@ -168,7 +171,8 @@ def change_vacancy(request, pk):
         form.save()
         vacancy.published_date = timezone.now()
         vacancy.save()
-        context = {'vacancy': vacancy}
+        owner = "YES"
+        context = {'vacancy': vacancy,'owner':owner }
         return render(request, 'blog/vacancy.html', context)
     else:
         form = VacancyForm(instance=vacancy)
@@ -192,13 +196,23 @@ def update_vacancy(request, pk):
 
 def resume_detail(request, pk):
     resume = Resume.objects.get(pk=pk)
-    context = {'resume': resume}
+    user_id= request.session.get("user", "red")
+    owner = "NO"
+    print(user_id,resume.user.id )
+    if  user_id == resume.user.id:
+        owner = "YES"
+        print(owner)
+    context = {'resume': resume, 'owner':owner }
     return render(request, 'blog/resume.html', context)
 
 
 def vacancy_detail(request, pk):
     vacancy= Vacancy.objects.get(pk=pk)
-    context = {'vacancy': vacancy}
+    user_id= request.session.get("user", "red")
+    owner = "NO"
+    if  user_id == vacancy.user.id:
+        owner = "YES"
+    context = {'vacancy': vacancy,'owner':owner }
     return render(request, 'blog/vacancy.html', context)
 
 
@@ -206,7 +220,7 @@ def delete_vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy,pk=pk)
     vacancy.delete()
     return redirect('blog:cabinet')
-    
+
 
 def delete_resume(request, pk):
     resume= get_object_or_404(Resume,pk=pk)

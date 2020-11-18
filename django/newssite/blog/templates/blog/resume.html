@@ -4,34 +4,34 @@
 
 <div class="container">
 <div class ="form" style="margin-top: 20px; padding: 20px">
+     <font face="times new roman">
      <h5><b>Резюме</b></h5>
-     <h5 style="margin-bottom: 20px;margin-top: 0"><b>{{resume.first_name}}{{resume.surname}}</b></h5>
-     <p><b>Позиция:   {{resume.position|cut:"https"}}</b></p>
-     <p>Тип работы: {{resume.type_work|cut:"https"}}</p>
-     <p>Местоположение: {{resume.town|cut:"https"}}</p>
+     <h5 style="margin-top: 0; "><b>{{resume.first_name}}{{resume.surname}}</b></h5>
+     {% if owner == "YES"  %}
+     <div class="button">
+     <a href="{% url 'blog:change_resume' resume.id %}" class="btn btn-outline-success">pедактировать</a>
+     <a href="{% url 'blog:cabinet' %}"class="btn btn-outline-success">сохранить</a></div>
+     {% endif %}
+     <pre style="margin-bottom: 0;"><b style="color:green;">Позиция:   {{resume.position|cut:"https"}}</b></pre>
+     <pre style="margin-bottom: 0;">Тип работы: {{resume.type_work|cut:"https"}}</pre>
+     <pre>Местоположение: {{resume.town|cut:"https"}}</pre>
      <p><b>Опыт работы</b></p>
-     <p> {{resume.experience|cut:"https"}}</p>
+     <pre> {{resume.experience|cut:"https"}}</pre>
      <p><b>Навыки</b></p>
-     <p> {{resume.skills|cut:"https"}}</p>
+     <pre> {{resume.skills|cut:"https"}}</pre>
      {% if resume.achievements %}
      <p><b>Достижения</b></p>
-     <p> {{resume.achievements|cut:"https"}}</p>
+     <pre> {{resume.achievements|cut:"https"}}</pre>
      {% endif %}
      <p><b>Образование</b></p>
-     <p>{{resume.education|cut:"https"}}</p>
+     <pre>{{resume.education|cut:"https"}}</pre>
      {% if resume.addition %}
      <p><b>Дополнительно</b></p>
-     <p> {{resume.addition|cut:"https"}}</p>
+     <pre> {{resume.addition|cut:"https"}}</pre>
      {% endif %}
-     <p>Телефон:{{resume.phone|phone2numeric}}</p>
-     <p>Email:{{resume.email}}</p>
-
-
-
-     <!-- </div>
-      <div class ="form"style="margin-bottom: 20px;" >
-      <a href="{% url 'blog:change_resume' resume.id %}" class="btn btn-outline-success" style="margin-bottom:0">Редактировать</a></div> -->
-
+     <pre style="margin-bottom: 0">Телефон: {{resume.phone|phone2numeric}}</pre>
+     <pre>Email: {{resume.email}}</pre>
+     </font>
 </div>
 {% endblock %}
 {% block pagination %} {% endblock %}

@@ -1,16 +1,14 @@
 
 .navigation {
-             font-size: 150%;
+             font-size: 170%;
              border-bottom: 6px double pink;
               border-top: 6px double pink;
-             font-family: 'Lobster';
-             }
+              font-family: 'Times New Roman'; font-style: italic;}
 
 .navigation button { background-color: white}
 .navbar-brand{font-size: 100%;}
 .navigation .navbar-brand{
           color: white; }
-
 .nav-link {color: black !important;}
 .nav-item :hover{color:white!important}
 .dropdown-menu a:hover {color:grey!important}
@@ -19,14 +17,20 @@
             border: 2px dotted green}
 .page-item a {color:green}
 
-.detail h2{text-align: center;}
-.detail{width:1000px; height:600px; }
-
 h2, h4, h5, h6 {text-align: center;}
 img{width: 230px; height:230px; }
 .detail_all{border: 1px solid green;}
 
-.form {border: 3px double green;border-radius: 8px; width: 80%;  font-family: 'Lobster'; color:#535956; }
+.form {border: 3px double green;border-radius: 8px; width: 80%; color:#535956;}
 .form table {color:#535956; text-align: center;}
 .form a {color:green; margin-bottom: 5%}
-pre, p, b{font-family: 'Lobster'}
+
+pre {white-space: pre-wrap;       /* css-3 */
+	   white-space: -moz-pre-wrap;  /* Mozilla, с 1999 года*/
+	   white-space: -pre-wrap;      /* Opera 4-6 */
+	   white-space: -o-pre-wrap;
+     font-family: 'Times New Roman'; font-style: normal; font-size: 115%;}
+b {font-size: 110%}
+p  b {font-size: 120%;}
+pre+p{ margin-bottom: 0%}
+.button a{ margin-bottom: 2%; font-weight: bold;}

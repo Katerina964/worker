@@ -4,15 +4,14 @@
 
 <div class="container">
 <div class ="form" style="margin-top: 20px; padding: 20px">
-     <font face="times new roman">
-     <h5><b>Резюме</b></h5>
-     <h5 style="margin-top: 0; "><b>{{resume.first_name}}{{resume.surname}}</b></h5>
+     <h3><b>Резюме</b></h3>
+     <h3 style="margin-top: 0; "><b>{{resume.first_name}}{{resume.surname}}</b></h3>
      {% if owner == "YES"  %}
      <div class="button">
      <a href="{% url 'blog:change_resume' resume.id %}" class="btn btn-outline-success">pедактировать</a>
      <a href="{% url 'blog:cabinet' %}"class="btn btn-outline-success">сохранить</a></div>
      {% endif %}
-     <pre style="margin-bottom: 0;"><b style="color:green;">Позиция:   {{resume.position|cut:"https"}}</b></pre>
+     <p style="margin-bottom: 0;"><b>Позиция:   {{resume.position|cut:"https"}}</b></p>
      <pre style="margin-bottom: 0;">Тип работы: {{resume.type_work|cut:"https"}}</pre>
      <pre>Местоположение: {{resume.town|cut:"https"}}</pre>
      <p><b>Опыт работы</b></p>
@@ -31,7 +30,6 @@
      {% endif %}
      <pre style="margin-bottom: 0">Телефон: {{resume.phone|phone2numeric}}</pre>
      <pre>Email: {{resume.email}}</pre>
-     </font>
 </div>
 {% endblock %}
 {% block pagination %} {% endblock %}

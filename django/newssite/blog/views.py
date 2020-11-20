@@ -32,18 +32,22 @@ def get_vacancies(request, keywords, position, cache_filename):
     delta_time = (datetime.now() - file_date).days
     print(delta_time,file_date)
     if delta_time > 0:
-        url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-        for page in range(1, 6):
-            data = {
-    	    "keywords": keywords,
-    	    "page": str(page)}
-            payload = requests.post(url, json=data)
-            vacancies = payload.json()["jobs"]
-            if page == 1:
-                vacancies_list = vacancies
-            vacancies_list += vacancies
-        with open(os.path.join('/django/newssite/blog/json', cache_filename), 'w') as f:
-              f.write(json.dumps(vacancies_list))
+        try:
+            url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
+            for page in range(1, 6):
+                data = {
+        	    "keywords": keywords,
+        	    "page": str(page)}
+                payload = requests.post(url, json=data)
+                vacancies = payload.json()["jobs"]
+                if page == 1:
+                    vacancies_list = vacancies
+                vacancies_list += vacancies
+            with open(os.path.join('/django/newssite/blog/json', cache_filename), 'w') as f:
+                  f.write(json.dumps(vacancies_list))
+        except:
+            with open(os.path.join('/django/newssite/blog/json', cache_filename), 'r') as f:
+                   vacancies_lists = json.load(f)
     with open(os.path.join('/django/newssite/blog/json', cache_filename), 'r') as f:
          vacancies_lists = json.load(f)
     vacancies_list = list(chain(worker_list, vacancies_lists))
@@ -198,7 +202,6 @@ def resume_detail(request, pk):
     resume = Resume.objects.get(pk=pk)
     user_id= request.session.get("user", "red")
     owner = "NO"
-    print(user_id,resume.user.id )
     if  user_id == resume.user.id:
         owner = "YES"
         print(owner)

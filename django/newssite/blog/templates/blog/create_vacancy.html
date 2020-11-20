@@ -6,8 +6,8 @@
 <form action="{% url 'blog:manage_vacancy' %}" method="POST" > {% csrf_token %}
 <div class ="form"  style="margin-top: 20px;">
      <h2>Создать вакансию</h2></div>
-     <div class ="form">    
-       <table>
+     <div class ="form">
+       <table class="create">
           {{ form  }}
        </table></div>
        <div class ="form"style="margin-bottom: 20px;" >

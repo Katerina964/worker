@@ -1,0 +1,9 @@
+p+table { position:absolute; bottom:20%}
+table+a {position:absolute; left:23%;}
+pre+table { position:absolute; bottom:20%}
+.container > .form { width:100%;}
+.create input,  textarea{width:100%;}
+.container form .form { width:100%;}
+body .container-fluid {height: auto}
+.navigation {font-size: 130%;}
+h2{font-size: 125%;}

@@ -6,11 +6,10 @@
       <div class="col-12 col-sm-4" style= "position:relative; height: 405px;border: 1px solid green;  "">
       <h5 style="margin-bottom:3%; margin-top: 2%;">{{ each.first_name }}{{ each.surname }}</h5>
       <p><b>Позиция: {{each.position|cut:"https"}}</b></p>
-      <p style="margin-bottom:5%">{{ each.experience|striptags|truncatechars:240  }}</p>
-
-      <table width="95%" height="25%"style="position:absolute; bottom:25%; padding:10px" >
+      <p style="margin-bottom:3%">{{ each.experience|striptags|truncatechars:230}}</p>
+      <table>
       <tr>
-      <td>Навыки: </td> <td>{{ each.skills|truncatechars:80 }}<td>
+      <td>Навыки: </td> <td>{{ each.skills|truncatechars:60 }}<td>
       </tr>
       <tr>
       <td>Локация:</td> <td>{{ each.town }}</td>
@@ -22,11 +21,8 @@
       <td>Дата:</td><td>{{ each.published_date|date:"d m Y" }}</td>
       </tr>
       </table>
-
       <a href="{% url 'blog:resume_detail' each.id %}"class="btn btn-outline-success"
-       style="position:absolute; bottom:5%; left:33.5%; width:200px;
-        border: 2px solid green; font-weight: 600;font-size: 115%;">Подробнее</a>
-
+       style="border: 2px solid green; font-weight: 600;font-size: 115%;">Подробнее</a>
       </div>
  {% endfor %}
 </div>

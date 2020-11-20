@@ -43,6 +43,10 @@
       <li class="nav-item">
       <a class="nav-link" href="{% url 'blog:cabinet' %}">кабинет</a>
       </li>
+      </li>
+      <li class="nav-item">
+      <a class="nav-link" href="{% url 'blog:homePageView' %}">о нас</a>
+      </li>
       </ul>
      </div>
      <form class="form-inline my-2 my-lg-0"action="{% url 'blog:enter' %}" method="POST">{% csrf_token %}
@@ -59,7 +63,7 @@
 </div>
 {% block pagination %}
 
-  <nav aria-label="..." style="margin-top: 2%" >
+  <nav aria-label="..." style="margin-top:1.7%" >
       <ul class="pagination justify-content-center">
          <li class="page-item">
          {% if page_obj.has_previous %}

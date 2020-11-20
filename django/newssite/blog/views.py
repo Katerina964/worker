@@ -28,7 +28,7 @@ def get_vacancies(request, keywords, position, cache_filename):
         vacancy = Vacancy.objects.filter(published_date__lt=month)
         vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains=position)
-    file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/json/cache_python.txt'))
+    file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/cache/cache_python.txt'))
     delta_time = (datetime.now() - file_date).days
     print(delta_time,file_date)
     if delta_time > 0:
@@ -43,12 +43,12 @@ def get_vacancies(request, keywords, position, cache_filename):
                 if page == 1:
                     vacancies_list = vacancies
                 vacancies_list += vacancies
-            with open(os.path.join('/django/newssite/blog/json', cache_filename), 'w') as f:
+            with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'w') as f:
                   f.write(json.dumps(vacancies_list))
         except:
-            with open(os.path.join('/django/newssite/blog/json', cache_filename), 'r') as f:
+            with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'r') as f:
                    vacancies_lists = json.load(f)
-    with open(os.path.join('/django/newssite/blog/json', cache_filename), 'r') as f:
+    with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'r') as f:
          vacancies_lists = json.load(f)
     vacancies_list = list(chain(worker_list, vacancies_lists))
     paginator = Paginator(vacancies_list, 6)

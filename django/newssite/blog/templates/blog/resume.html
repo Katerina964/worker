@@ -4,8 +4,8 @@
 
 <div class="container">
 <div class ="form" style="margin-top: 20px; padding: 20px">
-     <h3><b>Резюме</b></h3>
-     <h3 style="margin-top: 0; "><b>{{resume.first_name}}{{resume.surname}}</b></h3>
+     <h3 style="margin-bottom: 0";><b>Резюме</b></h3>
+     <h3 style="margin-top: 0;"><b>{{resume.first_name}}{{resume.surname}}</b></h3>
      {% if owner == "YES"  %}
      <div class="button">
      <a href="{% url 'blog:change_resume' resume.id %}" class="btn btn-outline-success">pедактировать</a>
@@ -15,18 +15,18 @@
      <pre style="margin-bottom: 0;">Тип работы: {{resume.type_work|cut:"https"}}</pre>
      <pre>Местоположение: {{resume.town|cut:"https"}}</pre>
      <p><b>Опыт работы</b></p>
-     <pre> {{resume.experience|cut:"https"}}</pre>
+     <pre>{{resume.experience|cut:"https"}}</pre>
      <p><b>Навыки</b></p>
-     <pre> {{resume.skills|cut:"https"}}</pre>
+     <pre>{{resume.skills|cut:"https"}}</pre>
      {% if resume.achievements %}
      <p><b>Достижения</b></p>
-     <pre> {{resume.achievements|cut:"https"}}</pre>
+     <pre>{{resume.achievements|cut:"https"}}</pre>
      {% endif %}
      <p><b>Образование</b></p>
      <pre>{{resume.education|cut:"https"}}</pre>
      {% if resume.addition %}
      <p><b>Дополнительно</b></p>
-     <pre> {{resume.addition|cut:"https"}}</pre>
+     <pre>{{resume.addition|cut:"https"}}</pre>
      {% endif %}
      <pre style="margin-bottom: 0">Телефон: {{resume.phone|phone2numeric}}</pre>
      <pre>Email: {{resume.email}}</pre>

@@ -12,15 +12,15 @@
      <pre style="margin-bottom: 0;">Тип работы: {{vacancy.type_work|cut:"https"}}</pre>
      <pre>Местоположение: {{vacancy.town|cut:"https"}}</pre>
      <p><b>Описание вакансии </b></p>
-     <pre> {{vacancy.description|cut:"https"}}</pre>
+     <pre>{{vacancy.description|cut:"https"}}</pre>
      {% if  vacancy.responsibilities %}
      <p><b>Обязанности</b></p>
-     <pre> {{vacancy.responsibilities|cut:"https"}}</pre>
+     <pre>{{vacancy.responsibilities|cut:"https"}}</pre>
      {% endif %}
      <p><b>Навыки</b></p>
-     <pre> {{vacancy.skills|cut:"https"}}</pre>
+     <pre>{{vacancy.skills|cut:"https"}}</pre>
      <p><b>Мы предлагаем</b></p>
-     <pre> {{vacancy.offer|cut:"https"}}</pre>
+     <pre>{{vacancy.offer|cut:"https"}}</pre>
      <pre style="margin-bottom: 0">Телефон: {{vacancy.phone|phone2numeric}}</pre>
      <pre>Email: {{vacancy.email}}</pre>
 </div>

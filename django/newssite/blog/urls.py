@@ -17,7 +17,7 @@ urlpatterns = [
     path('resume_list', views.resume_list, name='resume_list'),
     path('cabinet', views.cabinet, name='cabinet'),
     path('login', views.enter, name='enter'),
-    path('create_user', views.create_user, name='create_user'),
+    path('auth_user', views.auth_user, name='auth_user'),
     path('update_resume/<int:pk>/', views.change_resume, name='change_resume'),
     path('update_vacancy/<int:pk>/', views.change_vacancy, name='change_vacancy'),
     path('resume_update/<int:pk>', views.update_resume, name='update_resume'),
@@ -28,5 +28,6 @@ urlpatterns = [
     path('delete_resume/<int:pk>/', views.delete_resume, name='delete_resume'),
 
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+
 if settings.DEBUG:
     urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

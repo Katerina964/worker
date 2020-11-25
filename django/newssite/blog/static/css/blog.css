@@ -21,15 +21,15 @@ h2, h4, h5, h6, h3 {text-align: center;}
 img{width: 230px; height:230px; }
 .detail_all{border: 1px solid green;}
 
-.form {border: 3px double green;border-radius: 8px; width: 80%; color:#535956; margin-bottom: 2%}
+.form {border: 3px double green;border-radius: 8px; width: 80%; color:#535956; }
 .form table {color:#535956; text-align: center;}
 .form a {color:green; margin-bottom: 5%}
-.form h3 {font-family: 'Times New Roman'; font-style: normal; font-size: 115%; color:#535956}
+.form h3 {font-family: 'Times New Roman'; font-style: normal; font-size: 130%; color:#535956}
 pre {white-space: pre-wrap;       /* css-3 */
 	   white-space: -moz-pre-wrap;  /* Mozilla, с 1999 года*/
 	   white-space: -pre-wrap;      /* Opera 4-6 */
 	   white-space: -o-pre-wrap;
-     font-family: 'Times New Roman'; font-style: normal; font-size: 115%; color:#535956}
+     font-family: 'Times New Roman'; font-style: normal; font-size: 120%; color:#535956}
 b {font-size: 110%}
 p  b {font-size: 120%;font-family: 'Times New Roman'; font-style: normal; font-size: 115%; color:#535956}
 pre+p{ margin-bottom: 0%}

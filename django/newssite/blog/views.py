@@ -12,10 +12,11 @@ from django.db.models import F
 import json
 from django.contrib.auth import authenticate, login
 from django.contrib.auth.models import User
-from django.views.decorators.cache import cache_page
 from itertools import chain
 import os, time
 from os import path
+from django.core.mail import send_mail
+from django.conf import settings
 
 
 def homePageView(request):
@@ -140,16 +141,34 @@ def enter(request):
     if user:
         request.session["user"] = user.id
         return redirect('blog:cabinet')
-    return render(request, "blog/create_user.html")
+    return render(request, "blog/auth_user.html")
 
 
-def create_user(request):
-    user = authenticate(username=request.POST['email'],password=request.POST['password'])
-    if user:
-        request.session["user"] = user.id
-        return redirect('blog:cabinet')
-    context = {"user": user}
-    return render(request, 'blog/create_user.html', context)
+def auth_user(request):
+    if request.method == "POST":
+        email = request.POST['email']
+        password =request.POST['password']
+        user = authenticate(username=email, password=password)
+        if user:
+            request.session["user"] = user.id
+            return redirect('blog:cabinet')
+    if request.method == "GET":
+        try:
+            email = request.GET['email']
+            resume = Resume.objects.filter(email=email).last()
+            vacancy = Vacancy.objects.filter(email=email).last()
+            if resume:
+                password = resume.password
+            if vacancy:
+                password = vacancy.password
+            send_mail('Ваш пароль',f'Ваш пароль: {password}.',
+            settings.EMAIL_HOST_USER,
+            [email])
+            user = "YES"
+        except:
+            user = "NO"
+    context = {'user':user}
+    return render(request, 'blog/auth_user.html', context)
 
 
 def change_resume(request, pk):

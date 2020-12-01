@@ -29,13 +29,13 @@ def get_vacancies(request, keywords, position, cache_filename):
         vacancy = Vacancy.objects.filter(published_date__lt=month)
         vacancy.delete()
     worker_list = Vacancy.objects.filter(position__icontains=position)
-    file_date = datetime.fromtimestamp(path.getmtime('/django/newssite/blog/cache/cache_python.txt'))
+    file_date = datetime.fromtimestamp(path.getmtime(f'/django/newssite/blog/cache/{cache_filename}'))
     delta_time = (datetime.now() - file_date).days
     print(delta_time,file_date)
     if delta_time > 0:
         try:
             url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
-            for page in range(1, 6):
+            for page in range(1, 16):
                 data = {
         	    "keywords": keywords,
         	    "page": str(page)}
@@ -137,10 +137,6 @@ def cabinet(request):
 
 
 def enter(request):
-    user = authenticate(username=request.POST['email'],password=request.POST['password'])
-    if user:
-        request.session["user"] = user.id
-        return redirect('blog:cabinet')
     return render(request, "blog/auth_user.html")
 
 

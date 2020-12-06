@@ -21,7 +21,7 @@ h2, h4, h5, h6, h3 {text-align: center;}
 img{width: 230px; height:230px; }
 .detail_all{border: 1px solid green;}
 
-.form {border: 3px double green;border-radius: 8px; width: 80%; color:#535956; }
+.form {border: 3px double green;border-radius: 8px; color:#535956;  width: 900px }
 .form table {color:#535956; text-align: center;}
 .form a {color:green; margin-bottom: 5%}
 .form h3 {font-family: 'Times New Roman'; font-style: normal; font-size: 130%; color:#535956}
@@ -35,6 +35,7 @@ p  b {font-size: 120%;font-family: 'Times New Roman'; font-style: normal; font-s
 pre+p{ margin-bottom: 0%}
 .button a{ margin-bottom: 2%; font-weight: bold;}
 p+table {width:95%; height:25%; position:absolute; bottom:23%}
-table+a {position:absolute; bottom:5%; left:33.5%; width:200px; border:2px solid green; font-weight: 600; font-size:115%}
+.mx-auto a {position:absolute; bottom:5%;  width:200px; border:2px solid green; font-weight: 600; font-size:115%}
 .create  input,  textarea {width:150%;}
 body .container-fluid {height: 90%}
+.container-md  .auth {border: 3px double green;border-radius: 8px; width: 80%; height:50%; margin-top: 5%; font-size: 110%}

@@ -46,4 +46,5 @@ class Post(models.Model):
         return self.title
 
 # @cache_page(60 * 1440)
-  <div class="container-fluid p-0 "style="margin-left: 0px; margin-right: 0 px;">
+ p+table { position:absolute; bottom:20%}
+ pre+table { position:absolute; bottom:20%}

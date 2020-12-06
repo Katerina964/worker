@@ -113,11 +113,11 @@ def resume_list(request):
         month = datetime.now() - timedelta(days=61)
         resumes = Resume.objects.filter(published_date__lt=month)
         resumes.delete()
-    resume_list =Resume.objects.all().order_by("-published_date")
-    paginator = Paginator(resume_list, 6)
+    resumes =Resume.objects.all().order_by("-published_date")
+    paginator = Paginator(resumes, 6)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)
-    context = {'page_obj': page_obj}
+    context = {'page_obj': page_obj, 'resumes': resumes}
     return render(request, 'blog/resume_list.html', context)
 
 
@@ -128,7 +128,7 @@ def cabinet(request):
         vacancies = Vacancy.objects.filter(user=user_id).order_by("-published_date")
         cabinet_list = list(chain(resumes, vacancies))
     else:
-        return render(request, "blog/create_user.html")
+        return render(request, "blog/auth_user.html")
     paginator = Paginator(cabinet_list, 3)
     page = request.GET.get('page')
     page_obj = paginator.get_page(page)

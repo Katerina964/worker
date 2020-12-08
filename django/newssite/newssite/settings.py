@@ -131,10 +131,9 @@ STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static"),
-    '/var/www/static/',
-]
-STATIC_ROOT = "/home/katerina/Development/Projects/docker-compose-test/django/newssite/blog/static/"
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    ]
+# STATIC_ROOT = "/home/katerina/Development/Projects/docker-compose-test/django/newssite/blog/static/"
+
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 

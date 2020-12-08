@@ -1,11 +1,10 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 
-
-  <div class="container">
+  <div class="container-md px-1">
   <form method="POST">{% csrf_token %}
     {% if form_resume %}
-    <div class ="form" style="margin-top: 20px;">
+    <div class ="form mt-md-0  mt-xl-3 p-1">
     <h2>Резюме</h2></div>
     <div class ="form">
     <table class="create">
@@ -14,7 +13,7 @@
     <div class ="form"style="margin-bottom: 20px;" >
     <button type="submit" class="btn btn-outline-success">Сохранить</button></div>
     {% else %}
-    <div class ="form" style="margin-top: 20px;">
+    <div class ="form mt-md-0  mt-xl-3 p-1">
     <h2>Вакансия</h2></div>
     <div class ="form">
     <table class="create">

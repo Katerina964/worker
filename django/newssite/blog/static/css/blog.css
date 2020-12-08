@@ -39,3 +39,4 @@ p+table {width:95%; height:25%; position:absolute; bottom:23%}
 .create  input,  textarea {width:150%;}
 body .container-fluid {height: 90%}
 .container-md  .auth {border: 3px double green;border-radius: 8px; width: 80%; height:50%; margin-top: 5%; font-size: 110%}
+.auth p{margin-top: 60px}

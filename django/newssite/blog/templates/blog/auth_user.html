@@ -4,7 +4,7 @@
 
 <div class="container-md">
   <div class="auth p-2 mx-lg-auto" >
-  <p style="margin-bottom: 20px;margin-top: 60px">Введите email и пароль, указанные в размещенной Вами вакансии или резюме.</p>
+  <p style="margin-bottom: 20px;">Введите email и пароль, указанные в размещенной Вами вакансии или резюме.</p>
   <form class="form-inline my-2 my-lg-0" action="{% url 'blog:auth_user' %}" method="POST">{% csrf_token %}
   <input class="form-control mr-sm-2" style="font-weight: bold; border: 1px double grey" name='email' placeholder="email" aria-label="email">
   <input class="form-control mr-sm-2" style="font-weight: bold; border: 1px double grey" name='password' placeholder="password" aria-label="password">

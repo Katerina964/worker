@@ -33,6 +33,7 @@ def get_vacancies(request, keywords, position, cache_filename):
     delta_time = (datetime.now() - file_date).days
     print(delta_time,file_date)
     if delta_time > 0:
+
         try:
             url = "https://ru.jooble.org/api/46f8fbb2-41ac-4877-aa20-4b2479feb675"
             for page in range(1, 16):
@@ -81,31 +82,33 @@ def create_vacancy(request):
     return render(request, 'blog/create_vacancy.html', context)
 
 
-def manage_questionnaire(request, class_form, type, key, template):
-    user = authenticate(username=request.POST['email'],password= request.POST['password'])
-    if user is None:
-        try:
-            user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
-        except:
-            return render(request, 'blog/create_user.html')
-    request.session["user"] = user.id
+def manage_questionnaire(request, class_form, type, key, template1, template2):
     form = class_form(request.POST)
     if form.is_valid():
+        user = authenticate(username=request.POST['email'],password= request.POST['password'])
+        if user is None:
+            try:
+                user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
+            except:
+                return render(request, 'blog/auth_user.html')
         pk  = form.save().id
         owner = "YES"
-    questionnaire = type.objects.get(pk=pk)
-    questionnaire.user = user
-    questionnaire.save()
-    context = {key: questionnaire, 'owner':owner }
-    return render(request, template, context)
+        request.session["user"] = user.id
+        questionnaire = type.objects.get(pk=pk)
+        questionnaire.user = user
+        questionnaire.save()
+        context = {key: questionnaire, 'owner':owner }
+        return render(request, template1, context)
+    context = {'form': form}
+    return render(request, template2, context)
 
 
 def manage_vacancy(request):
-    return  manage_questionnaire(request, VacancyForm, Vacancy, "vacancy", 'blog/vacancy.html' )
+    return  manage_questionnaire(request, VacancyForm, Vacancy, "vacancy", 'blog/vacancy.html', 'blog/create_vacancy.html' )
 
 
 def manage_resume(request):
-    return  manage_questionnaire(request, ResumeForm, Resume, "resume", 'blog/resume.html'  )
+    return  manage_questionnaire(request, ResumeForm, Resume, "resume", 'blog/resume.html', 'blog/create_resume.html'  )
 
 
 def resume_list(request):

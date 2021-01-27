@@ -9,6 +9,14 @@
      <div class ="form mx-lg-auto">
        <table class="create">
           {{ form  }}
+          {% if owner == "MISTAKE" %}
+          <div class="alert alert-success " role="alert">
+          Вы ввели неверный пароль, повторите попытку или зайдите на страницу "LOG IN" и отправьте запрос на восстановление пароля.
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          {% endif %}
        </table></div>
        <div class ="form mx-lg-auto mb-2">
        <button type="submit" class="btn btn-success">Сохранить и опубликовать</button></div>

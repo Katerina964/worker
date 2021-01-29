@@ -49,6 +49,8 @@ class Resume(models.Model):
         return self.first_name + " " + self.surname+ " " + str(self.pk)
 
 
+
+
 class Vacancy(models.Model):
 
     position = models.CharField(max_length=50, verbose_name='Позиция',)

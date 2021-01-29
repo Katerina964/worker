@@ -32,10 +32,6 @@ from django.core import validators
 
 
 class ResumeForm(forms.ModelForm):
-    # default_validators = [validate_even]
-    # def validate(self,value):
-    #     if value.isspace():
-    #         raise ValidationError('%s is not an even number' % value)
 
     class Meta:
         model = Resume
@@ -58,6 +54,11 @@ class ResumeForm(forms.ModelForm):
             'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис, удаленно, количество часов в день."}),
 
         }
+        # def validate(self,value):
+        #     resault = value.istitle()
+        #     if resault == False:
+        #         raise ValidationError(
+        #         _('must be capitalized'))
 
 class VacancyForm(forms.ModelForm):
     class Meta:

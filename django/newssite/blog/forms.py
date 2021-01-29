@@ -1,8 +1,41 @@
 from django import forms
 from .models import Resume, Vacancy
+from django.core.exceptions import ValidationError
+from django.core.validators import RegexValidator
+from django.core.exceptions import ValidationError
+from django.core import validators
+
+
+# def validate_space(value):
+#     if value.isspace():
+#         raise ValidationError(
+#             _('%(value)s is not an even number'),
+#             params={'value': value},
+#        )
+
+# class CharField(forms.Field):
+#
+#      def validate(self, value):
+#         super().validate(value)
+#         if value.isspace():
+#             raise forms.ValidationError("You have forgotten about Fred!")
+
+# def validate_even(value):
+#     if value.isspace():
+#         raise ValidationError('%s is not an even number' % value)
+
+# class MyField(forms.CharField):
+#     default_validators = [validate_even]
+    # def check_space(self, value):
+    #     if value.isspace():
+    #         raise ValidationError('%s is not an even number' % value)
 
 
 class ResumeForm(forms.ModelForm):
+    # default_validators = [validate_even]
+    # def validate(self,value):
+    #     if value.isspace():
+    #         raise ValidationError('%s is not an even number' % value)
 
     class Meta:
         model = Resume

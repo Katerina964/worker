@@ -6,22 +6,19 @@ from django.core import validators
 from django.utils.translation import gettext_lazy as _
 from django.core.validators import RegexValidator
 
-def validate_space(value):
+def validate_capitalized(value):
     resault = value.istitle()
     if resault == False:
         raise ValidationError(
             _('must be capitalized')) # it work
 
 
-# class MyField(models.CharField):
-#     default_validators = [validate_space]
-#     # def check_space(self, value):
-#     #     if value.istitle():
-#     #         raise ValidationError('%s is not a text' % value)
+class MyField(models.CharField):
+    default_validators = [validate_capitalized]  # it work , show massege top on the field
 
 
 class Resume(models.Model):
-    first_name = models.CharField(max_length=15, verbose_name='Имя')
+    first_name = MyField(max_length=15, verbose_name='Имя')
     surname = models.CharField(max_length=15, verbose_name='Фамилия', blank=True)
     position = models.CharField(max_length=50, verbose_name='Позиция', validators=[
         RegexValidator( #it  work well
@@ -34,7 +31,7 @@ class Resume(models.Model):
     phone = models.CharField(max_length=30, verbose_name='Телефон')
     email = models.EmailField(max_length=30, verbose_name='Почта')
     password = models.CharField(max_length=20, verbose_name='Пароль')
-    experience = models.TextField( verbose_name='Опыт работы', validators=[validate_space] )
+    experience = models.TextField( verbose_name='Опыт работы', validators=[validate_capitalized] )
     skills = models.TextField(verbose_name="Навыки",)
     achievements = models.TextField( verbose_name='Достижения', blank=True)
     education = models.TextField( verbose_name='Образование')
@@ -48,7 +45,7 @@ class Resume(models.Model):
     def __str__(self):
         return self.first_name + " " + self.surname+ " " + str(self.pk)
 
-
+    
 
 
 class Vacancy(models.Model):

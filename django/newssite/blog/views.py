@@ -90,7 +90,7 @@ def manage_questionnaire(request, class_form, type, key, template1, template2):
             try:
                 user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
             except:
-                owner = "MISTAKE"                
+                owner = "MISTAKE"
                 context = {'form': form, 'owner':owner}
                 return render(request, template2, context)
         pk  = form.save().id

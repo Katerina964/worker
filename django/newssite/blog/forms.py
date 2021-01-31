@@ -6,32 +6,46 @@ from django.core.exceptions import ValidationError
 from django.core import validators
 
 
-# def validate_space(value):
-#     if value.isspace():
-#         raise ValidationError(
-#             _('%(value)s is not an even number'),
-#             params={'value': value},
-#        )
+def validate_capitalized(value):
+    resault = value.istitle()
+    if resault == False:
+        raise ValidationError(
+            ('must be ')) # it work
 
-# class CharField(forms.Field):
-#
-#      def validate(self, value):
-#         super().validate(value)
-#         if value.isspace():
-#             raise forms.ValidationError("You have forgotten about Fred!")
 
-# def validate_even(value):
-#     if value.isspace():
-#         raise ValidationError('%s is not an even number' % value)
+class NewField(forms.CharField):
+    default_validators = [validate_capitalized]
 
-# class MyField(forms.CharField):
-#     default_validators = [validate_even]
-    # def check_space(self, value):
-    #     if value.isspace():
-    #         raise ValidationError('%s is not an even number' % value)
+
+class MultiField(forms.Field):
+    def to_python(self, value):
+        """Normalize data to a list of strings."""
+        # Return an empty list if no input was given.
+        if not value:
+            return []
+        return value.split(',')
+
+    def validate(self, value):
+        """Check if value consists only of valid emails."""
+        # Use the parent's handling of required fields, etc.
+        super().validate(value)
+        for email in value:
+            validate_capitalized(email)
 
 
 class ResumeForm(forms.ModelForm):
+    example2 = MultiField()
+    example = NewField()
+
+    def clean(self):   # it works as validators, with msg top on field
+        super().clean()
+        first_name = self.cleaned_data.get("first_name")
+        print(first_name)
+        surname = self.cleaned_data.get("surname")
+
+        if first_name not in surname:
+            msg = "Must put 'help' in subject when cc'ing yourself."
+            self.add_error('surname', msg)
 
     class Meta:
         model = Resume
@@ -54,11 +68,6 @@ class ResumeForm(forms.ModelForm):
             'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис, удаленно, количество часов в день."}),
 
         }
-        # def validate(self,value):
-        #     resault = value.istitle()
-        #     if resault == False:
-        #         raise ValidationError(
-        #         _('must be capitalized'))
 
 class VacancyForm(forms.ModelForm):
     class Meta:

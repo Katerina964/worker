@@ -5,14 +5,6 @@ from django.core.exceptions import ValidationError
 from django.core.validators import RegexValidator
 
 
-# def validate_space(value):
-#     if value.isspace():
-#         raise ValidationError(
-#             _('%(value)s is not an even number'),
-#             params={'value': value},
-#         )
-#
-
 class Resume(models.Model):
     first_name = models.CharField(max_length=15, verbose_name='Имя', )
     surname = models.CharField(max_length=15, verbose_name='Фамилия', blank=True)

@@ -6,6 +6,7 @@ from django.core.validators import RegexValidator
 
 
 class Resume(models.Model):
+    
     first_name = models.CharField(max_length=15, verbose_name='Имя', )
     surname = models.CharField(max_length=15, verbose_name='Фамилия', blank=True)
     position = models.CharField(max_length=50, verbose_name='Позиция',)
@@ -26,6 +27,8 @@ class Resume(models.Model):
 
     def __str__(self):
         return self.first_name + " " + self.surname+ " " + str(self.pk)
+
+
 
 
 class Vacancy(models.Model):

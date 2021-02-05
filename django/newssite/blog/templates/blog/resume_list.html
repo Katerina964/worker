@@ -4,7 +4,7 @@
 <div class="row">
   {% for each in page_obj %}
   <div class="col-12 col-md-4" style= "position:relative; height: 405px;border: 1px solid green;">
-  <h5>{{ each.first_name }}{{ each.surname }}</h5>
+  <h5 style="margin-bottom:2%; margin-top: 2%;">{{ each.first_name }} {{ each.surname }}</h5>
   <div class="mb-md-0 mb-xl-2"><b >Позиция: {{each.position|cut:"https"}}</b></div>
   <p>{{ each.experience|truncatechars:230|linebreaksbr }}</p>
   <table>
@@ -12,7 +12,7 @@
   <td>Навыки: </td> <td>{{ each.skills|truncatechars:30 }}<td>
   </tr>
   <tr>
-  <td>Локация:</td> <td>{{ each.town }}</td>
+  <td>Локация:</td> <td>{{ each.town|truncatechars:17 }}</td>
   </tr>
   <tr>
   <td>Заработная плата:</td> <td>{{ each.salary|default:"не указана"}}</td>

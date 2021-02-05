@@ -28,7 +28,7 @@ def get_vacancies(request, keywords, position, cache_filename):
         month = datetime.now() - timedelta(days=61)
         vacancy = Vacancy.objects.filter(published_date__lt=month)
         vacancy.delete()
-    worker_list = Vacancy.objects.filter(position__icontains=position)
+    worker_list = Vacancy.objects.filter(position__icontains=position).order_by("-published_date")
     file_date = datetime.fromtimestamp(path.getmtime(f'/django/newssite/blog/cache/{cache_filename}'))
     delta_time = (datetime.now() - file_date).days
     print(delta_time,file_date)
@@ -129,8 +129,10 @@ def resume_list(request):
 def cabinet(request):
     user_id= request.session.get("user", "red")
     if user_id != 'red':
-        resumes = Resume.objects.filter(user=user_id).order_by("-published_date")
+        resumes = Resume.objects.filter(user=user_id).order_by('-published_date')
+        print(resumes,user_id )
         vacancies = Vacancy.objects.filter(user=user_id).order_by("-published_date")
+        print(vacancies,user_id )
         cabinet_list = list(chain(resumes, vacancies))
     else:
         return render(request, "blog/auth_user.html")

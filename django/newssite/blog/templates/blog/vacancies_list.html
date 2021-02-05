@@ -1,23 +1,22 @@
 {% extends 'blog/base.html' %}
 {% block content %}
 
-
 <div class="container-fluid">
 <div class="row">
  {% for each in page_obj %}
  {% if each.position %}
  <div class="col-12 col-md-4" style="position:relative; height: 405px;border: 1px solid green;">
- <h4 style="margin-bottom:4%; margin-top: 2%;">{{ each.position|truncatechars:40}}</h4>
- <p style="margin-bottom:5%">{{ each.description|truncatechars:230  }}</p>
+ <h5 style="margin-bottom:3%; margin-top: 3%;font-size: 140%;">{{ each.position|truncatechars:40}}</h5>
+ <p style="height:37%; overflow: hidden;  ">{{ each.description|truncatechars:240  }}</p>
  <table >
  <tr>
  <td>Компания: </td> <td>{{ each.company|truncatechars:17 }}<td>
  </tr>
  <tr>
- <td>Локация:</td> <td>{{ each.town }}</td>
+ <td>Локация:</td> <td>{{ each.town|truncatechars:17 }}</td>
  </tr>
  <tr>
- <td>Заработная плата:</td> <td>{{ each.salary|default:"не указана" }}</td>
+ <td>Заработная плата:</td> <td>{{ each.salary|default:"не указана" }}</td
  </tr>
  <tr>
  <td>Дата обновления:</td><td>{{ each.published_date|date:"d m Y" }}</td>
@@ -30,14 +29,14 @@
 
   {% else %}
      <div class="col-12 col-md-4" style="position:relative; height: 405px;border: 1px solid green;">
-      <h4 style="margin-bottom:4%; margin-top: 2%;">{{ each.title|truncatechars:40}}</h4>
-      <p style="margin-bottom:5%">{{ each.snippet|striptags|cut:"&nbsp;..."|cut:"&nbsp;"|truncatechars:230  }}</p>
+      <h5 style="margin-bottom:3%; margin-top: 3%;font-size: 140%;">{{ each.title|truncatechars:40}}</h5>
+      <p style="height:37%; overflow: hidden; text-overflow: ellipsis; ">{{ each.snippet|striptags|cut:"&nbsp;"|cut:"&nbsp;"|truncatechars:240}}</p>
       <table >
       <tr>
       <td>Компания: </td> <td>{{ each.company|truncatechars:17}}<td>
       </tr>
       <tr>
-      <td>Локация:</td> <td>{{ each.location }}</td>
+      <td>Локация:</td> <td>{{ each.location|truncatechars:17 }}</td>
       </tr>
       <tr>
       <td>Заработная плата:</td> <td>{{ each.salary|default:"не указана" }}</td>

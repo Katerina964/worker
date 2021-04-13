@@ -25,7 +25,7 @@ SECRET_KEY = '8!n+_#$$unbl^sqsu!*-eb30+^q7tqn)6lqm#-^45(73x*4s_l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost','192.168.0.195' ]
+ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '192.168.0.195']
 
 
 # Application definition
@@ -110,7 +110,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/3.0/topics/i18n/
 
@@ -130,8 +129,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, "static"),
-    ]
+    os.path.join(BASE_DIR, "static")]
 # STATIC_ROOT = "/home/katerina/Development/Projects/docker-compose-test/django/newssite/blog/static/"
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')

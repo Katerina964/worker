@@ -1,13 +1,12 @@
-from django.urls import path, re_path
+from django.urls import path
 from django.conf.urls.static import static
 from django.conf import settings
-from .views import homePageView
 from . import views
 
 app_name = 'blog'
 
 urlpatterns = [
-    path('worker',views.homePageView, name='homePageView'),
+    path('worker', views.homePageView, name='homePageView'),
     path('', views.python_developer, name='python_developer'),
     path('java_developer', views.java_developer, name='java_developer'),
     path('create_resume', views.create_resume, name='create_resume'),

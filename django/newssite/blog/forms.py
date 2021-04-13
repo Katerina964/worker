@@ -7,7 +7,8 @@ class ResumeForm(forms.ModelForm):
     class Meta:
         model = Resume
         fields = ('first_name', 'surname', 'position', 'town',
-        'phone', 'email','password', 'experience','skills','achievements', 'education','type_work','addition' ,'salary')
+                  'phone', 'email', 'password', 'experience', 'skills', 'achievements', 'education', 'type_work',
+                  'addition', 'salary')
         widgets = {
             'first_name': forms.TextInput(),
             'surname': forms.TextInput(),
@@ -16,13 +17,14 @@ class ResumeForm(forms.ModelForm):
             'phone': forms.TextInput(),
             'salary': forms.TextInput(),
             'email': forms.EmailInput(),
-            'password': forms.TextInput(attrs={'placeholder': "Введите пароль для авторизации на сайте"} ),
-            'experience': forms.Textarea(attrs={'placeholder': "Укажите  опыт работы в порядке убывания" }),
+            'password': forms.TextInput(attrs={'placeholder': "Введите пароль для авторизации на сайте"}),
+            'experience': forms.Textarea(attrs={'placeholder': "Укажите  опыт работы в порядке убывания" },
             'skills': forms.Textarea(),
             'achievements': forms.Textarea(),
             'education': forms.Textarea(),
             'addition': forms.Textarea(),
-            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис, удаленно, количество часов в день."}),
+            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии.
+             Например: офис, удаленно, количество часов в день."}),
 
         }
 
@@ -42,6 +44,7 @@ class VacancyForm(forms.ModelForm):
             'responsibilities': forms.Textarea(),
             'skills': forms.Textarea(),
             'offer': forms.Textarea(),
-            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис, удаленно, количество часов в день."}),
+            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис,
+             удаленно, количество часов в день."}),
             'salary': forms.TextInput(),
         }

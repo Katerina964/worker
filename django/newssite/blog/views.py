@@ -43,7 +43,7 @@ def get_vacancies(request, keywords, position, cache_filename):
                 vacancies_list += vacancies
             with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'w') as f:
                 f.write(json.dumps(vacancies_list))
-        except:
+        except Exception:
             with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'r') as f:
                 vacancies_lists = json.load(f)
     with open(os.path.join('/django/newssite/blog/cache', cache_filename), 'r') as f:
@@ -85,7 +85,7 @@ def manage_questionnaire(request, class_form, type, key, template1, template2):
         if user is None:
             try:
                 user = User.objects.create_user(username=request.POST['email'], password=request.POST['password'])
-            except:
+            except Exception:
                 owner = "MISTAKE"
                 context = {'form': form, 'owner': owner}
                 return render(request, template2, context)
@@ -167,7 +167,7 @@ def auth_user(request):
                       [email])
             user = "YES"
             print(user)
-        except:
+        except Exception:
             user = "NO"
             print(user)
     context = {'user': user}

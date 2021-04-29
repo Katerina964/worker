@@ -1,5 +1,6 @@
-from django import forms
+
 from .models import Resume, Vacancy
+from django import forms
 
 
 class ResumeForm(forms.ModelForm):
@@ -18,21 +19,23 @@ class ResumeForm(forms.ModelForm):
             'salary': forms.TextInput(),
             'email': forms.EmailInput(),
             'password': forms.TextInput(attrs={'placeholder': "Введите пароль для авторизации на сайте"}),
-            'experience': forms.Textarea(attrs={'placeholder': "Укажите  опыт работы в порядке убывания" },
+            'experience': forms.Textarea(attrs={'placeholder': "Укажите  опыт работы в порядке убывания"}),
             'skills': forms.Textarea(),
             'achievements': forms.Textarea(),
             'education': forms.Textarea(),
             'addition': forms.Textarea(),
-            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии.
-             Например: офис, удаленно, количество часов в день."}),
+            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис,\
+                                        удаленно, количество часов в день."}),
 
         }
+
 
 class VacancyForm(forms.ModelForm):
     class Meta:
         model = Vacancy
-        fields = ( 'position',  'company', 'type_work', 'town',
-        'phone', 'email', 'password', 'description', 'responsibilities','skills', 'offer','salary', 'published_date')
+        fields = ('position', 'company', 'type_work', 'town',
+                  'phone', 'email', 'password', 'description', 'responsibilities', 'skills', 'offer', 'salary',
+                  'published_date')
         widgets = {
             'position': forms.TextInput(),
             'company': forms.TextInput(),
@@ -44,7 +47,7 @@ class VacancyForm(forms.ModelForm):
             'responsibilities': forms.Textarea(),
             'skills': forms.Textarea(),
             'offer': forms.Textarea(),
-            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис,
-             удаленно, количество часов в день."}),
+            'type_work': forms.Textarea(attrs={'placeholder': " Укажите важные для Вас критерии. Например: офис,\
+                                               удаленно, количество часов в день."}),
             'salary': forms.TextInput(),
         }

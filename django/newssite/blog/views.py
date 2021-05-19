@@ -177,16 +177,19 @@ def auth_user(request):
 def change_resume(request, pk):
     resume = get_object_or_404(Resume, pk=pk)
     if request.method == "POST":
-        form = ResumeForm(request.POST, instance=resume)
-        form.save()
-        resume.published_date = timezone.now()
-        resume.save()
-        owner = "YES"
-        context = {'resume': resume, 'owner': owner}
-        return render(request, 'blog/resume.html', context)
+        form_resume = ResumeForm(request.POST, instance=resume)
+        if form_resume.is_valid():
+            form_resume.save()
+            resume.published_date = timezone.now()
+            resume.save()
+            owner = "YES"
+            context = {'resume': resume, 'owner': owner}
+            return render(request, 'blog/resume.html', context)
+        else:
+            print(form_resume.errors)
     else:
         form_resume = ResumeForm(instance=resume)
-        context = {"form_resume": form_resume}
+    context = {"form_resume": form_resume}
     return render(request, 'blog/change_resume_vacancy.html', context)
 
 
@@ -194,15 +197,18 @@ def change_vacancy(request, pk):
     vacancy = get_object_or_404(Vacancy, pk=pk)
     if request.method == "POST":
         form = VacancyForm(request.POST, instance=vacancy)
-        form.save()
-        vacancy.published_date = timezone.now()
-        vacancy.save()
-        owner = "YES"
-        context = {'vacancy': vacancy, 'owner': owner}
-        return render(request, 'blog/vacancy.html', context)
+        if form.is_valid():
+            form.save()
+            vacancy.published_date = timezone.now()
+            vacancy.save()
+            owner = "YES"
+            context = {'vacancy': vacancy, 'owner': owner}
+            return render(request, 'blog/vacancy.html', context)
+        else:
+            print(form.errors)
     else:
         form = VacancyForm(instance=vacancy)
-        context = {"form": form}
+    context = {"form": form}
     return render(request, 'blog/change_resume_vacancy.html', context)
 
 

@@ -1,13 +1,13 @@
  {% extends 'blog/base.html' %}
 {% block content %}
 <div class="container-md px-0">
-  
+
  {% for each in page_obj %}
 
      <div class="form mx-lg-auto mt-lg-3 " style="height:240px;">
       {% if  each.first_name  %}
       <div style="height: 42%">
-      <h5 style="margin-bottom:3%; margin-top: 2%;">Резюме {{ each.first_name }}{{ each.surname }}</h5>
+      <h5 style="margin-bottom:3%; margin-top: 2%;">Резюме {{ each.first_name }} {{ each.surname }}</h5>
       <a href="{% url 'blog:resume_detail' each.id %}"><b> Позиция:   {{each.position|cut:"https"}}</b></a></div>
       <div style="height: 30%">
       <p>Дата: {{ each.published_date|date:"d m Y" }}</p></div>

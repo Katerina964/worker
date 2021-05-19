@@ -34,8 +34,7 @@ class VacancyForm(forms.ModelForm):
     class Meta:
         model = Vacancy
         fields = ('position', 'company', 'type_work', 'town',
-                  'phone', 'email', 'password', 'description', 'responsibilities', 'skills', 'offer', 'salary',
-                  'published_date')
+                  'phone', 'email', 'password', 'description', 'responsibilities', 'skills', 'offer', 'salary')
         widgets = {
             'position': forms.TextInput(),
             'company': forms.TextInput(),

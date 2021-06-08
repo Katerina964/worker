@@ -1,0 +1,11 @@
+User-agent: Yandex
+Disallow: /create_vacancy
+Disallow: /create_resume
+
+User-agent: Googlebot
+Disallow: /create_vacancy
+Disallow: /create_resume
+
+User-agent: *
+Disallow: /create_vacancy
+Disallow: /create_resume

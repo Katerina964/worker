@@ -34,7 +34,7 @@ b {font-size: 110%}
 p  b {font-size: 120%;font-family: 'Times New Roman'; font-style: normal; font-size: 115%; color:#535956}
 pre+p{ margin-bottom: 0%}
 .button a{ margin-bottom: 2%; font-weight: bold;}
-p+table {width:95%; height:25%; position:absolute; bottom:23%}
+p+table {width:95%; height:25%; position:absolute; bottom:28%}
 .mx-auto a {position:absolute; bottom:5%;  width:200px; border:2px solid green; font-weight: 600; font-size:115%}
 .create  input,  textarea {width:150%;}
 body .container-fluid {height: 90%}

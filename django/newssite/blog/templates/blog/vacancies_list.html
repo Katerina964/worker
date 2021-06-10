@@ -5,9 +5,9 @@
 <div class="row">
  {% for each in page_obj %}
  {% if each.position %}
- <div class="col-12 col-md-4" style="position:relative; height: 24.3em; border: 1px solid green;">
- <h5 style="margin-bottom:3%; margin-top: 3%;font-size: 140%;">{{ each.position|truncatechars:40}}</h5>
- <p style="height:37%; overflow: hidden;  ">{{ each.description|truncatechars:240  }}</p>
+ <div class="col-12 col-md-4" style="position:relative; height: 25.2em; border: 1px solid green;">
+ <h5 style="margin-bottom:3%; margin-top: 5%;font-size: 140%;">{{ each.position|truncatechars:40}}</h5>
+ <p style="height: 6em; overflow: hidden; ">{{ each.description|truncatechars:240  }}</p>
  <table >
  <tr>
  <td>Компания: </td> <td>{{ each.company|truncatechars:17 }}<td>
@@ -28,9 +28,9 @@
  </div>
 
   {% else %}
-     <div class="col-12 col-md-4" style="position:relative; height: 24.3em; border: 1px solid green;">
-      <h5 style="margin-bottom:3%; margin-top: 3%;font-size: 140%;">{{ each.title|truncatechars:40}}</h5>
-      <p style="height:37%; overflow: hidden; text-overflow: ellipsis; ">{{ each.snippet|striptags|cut:"&nbsp;"|cut:"&nbsp;"|truncatechars:240}}</p>
+     <div class="col-12 col-md-4" style="position:relative; height: 25.2em; border: 1px solid green;">
+      <h5 style="margin-bottom:5%; margin-top: 3%;font-size: 140%;">{{ each.title|truncatechars:40}}</h5>
+      <p style="height: 6em; overflow: hidden; text-overflow: ellipsis; ">{{ each.snippet|striptags|cut:"&nbsp;"|cut:"&nbsp;"|truncatechars:240}}</p>
       <table >
       <tr>
       <td>Компания: </td> <td>{{ each.company|truncatechars:17}}<td>
